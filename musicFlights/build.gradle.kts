@@ -11,8 +11,6 @@ android {
 
     defaultConfig {
         minSdk = 27
-        targetSdk = 34
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,10 +45,13 @@ dependencies {
 
     implementation(libs.retrofit)
 
+    implementation(libs.hilt.dagger)
     implementation(libs.hilt.common)
     ksp(libs.hilt.compiler)
 
     implementation(libs.delegate.adapter)
 
     implementation(libs.kotlinx.serialization)
+
+    implementation(project(":core"))
 }

@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.drexask.effectivemobiletickets.SpaceItemDecoration
 import com.drexask.effectivemobiletickets.databinding.FragmentAviaTicketsBinding
 import com.drexask.musicflights.domain.model.MusicFlightDto
 import com.drexask.musicflights.domain.model.Price
@@ -54,6 +56,8 @@ class AviaTicketsFragment : Fragment() {
         bd.musicFlightsRecycler.adapter = adapter
         bd.musicFlightsRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
+
+        bd.musicFlightsRecycler.addItemDecoration(SpaceItemDecoration(100))
 
 
         return bd.root

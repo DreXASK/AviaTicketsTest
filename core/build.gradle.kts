@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.drexask.core"
+    namespace = "com.drexask.effectivemobiletickets.core"
     compileSdk = 34
 
     defaultConfig {

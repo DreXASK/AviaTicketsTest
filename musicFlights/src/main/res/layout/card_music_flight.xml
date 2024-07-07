@@ -9,16 +9,18 @@
 
     <ImageView
         android:id="@+id/iv_musician"
-        android:layout_width="132dp"
-        android:layout_height="132dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:background="@drawable/round_rectangle_shape_16dp"
         android:outlineProvider="background"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tv_title"
+        style="@style/text_title3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
         android:text="TextView"
         tools:text="Die Antwoord" />
 
@@ -26,26 +28,29 @@
         android:id="@+id/tv_town"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/text_text2"
         android:text="TextView"
         tools:text="Будапешт" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/"
+            app:tint="@color/grey_6"
             tools:srcCompat="@drawable/ic_plane" />
 
         <TextView
             android:id="@+id/tv_price"
+            style="@style/text_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:text="TextView"
             tools:text="от 22 264 ₽" />
     </LinearLayout>

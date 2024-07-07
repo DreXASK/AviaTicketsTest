@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.drexask.effectivemobiletickets.R
 import com.drexask.effectivemobiletickets.databinding.ActivityMainBinding
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : AppCompatActivity() {
 

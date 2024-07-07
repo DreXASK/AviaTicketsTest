@@ -19,7 +19,7 @@ class MusicFlightsDelegateAdapter:
         tvTitle.text = item.title
         tvTown.text = item.town
         ivIcon.setImageResource(R.drawable.ic_plane)
-        tvPrice.text = "${item.price.value} ₽"
+        tvPrice.text = "от ${item.price.value} ₽"
     }
 
         override fun MusicFlightDto.getItemId(): Any = title
