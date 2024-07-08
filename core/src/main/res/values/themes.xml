@@ -9,9 +9,6 @@
     <style name="Base.Widget.Material3.CardView.Custom">
         <item name="cardBackgroundColor">@color/grey_3</item>
         <item name="cardCornerRadius">20dp</item>
-        <item name="android:shadowDy">4</item>
-        <item name="android:shadowRadius">4</item>
-        <item name="android:shadowColor">@color/shadow</item>
     </style>
 
     <style name="ThemeOverlay.Material3.TextInputEditText.Custom">

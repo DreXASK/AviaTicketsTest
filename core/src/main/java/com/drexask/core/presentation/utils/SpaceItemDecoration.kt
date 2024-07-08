@@ -1,4 +1,4 @@
-package com.drexask.effectivemobiletickets
+package com.drexask.core.presentation.utils
 
 import android.graphics.Rect
 import android.view.View

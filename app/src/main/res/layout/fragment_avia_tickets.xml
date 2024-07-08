@@ -5,7 +5,7 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AviaTicketsFragment" >
+    tools:context=".presentation.ui.fragment.aviaTicketsFragment.AviaTicketsFragment" >
 
     <TextView
         android:id="@+id/tv_header"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardOuter"
         style="@style/Base.Widget.Material3.CardView.Custom"
         android:layout_width="0dp"
@@ -32,9 +32,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_header" />
 
-    <com.google.android.material.card.MaterialCardView
+
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardInner"
         style="@style/Base.Widget.Material3.CardView.Custom"
+        app:cardElevation="24dp"
+        app:cardMaxElevation="36dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="20dp"
@@ -42,60 +46,66 @@
         app:layout_constraintBottom_toBottomOf="@+id/cardOuter"
         app:layout_constraintEnd_toEndOf="@+id/cardOuter"
         app:layout_constraintStart_toStartOf="@+id/cardOuter"
-        app:layout_constraintTop_toTopOf="@+id/cardOuter" />
+        app:layout_constraintTop_toTopOf="@+id/cardOuter" >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_magnifier"
-        app:layout_constraintBottom_toBottomOf="@+id/cardInner"
-        app:layout_constraintEnd_toEndOf="@+id/cardInner"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/cardInner"
-        app:layout_constraintTop_toTopOf="@+id/cardInner"
-        app:tint="@color/grey_6" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/cardInner"
-        app:layout_constraintEnd_toEndOf="@+id/cardInner"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/cardInner" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_magnifier"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/grey_6" />
 
-    <EditText
-        android:id="@+id/et_from"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:autofillHints="city, country"
-        android:digits="абвгдеёжзийклмнопрстуфхцчшщъыьэюя АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,1234567890"
-        android:ems="12"
-        android:hint="Откуда - Москва"
-        android:inputType="text"
-        android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="@+id/divider"
-        app:layout_constraintTop_toTopOf="@+id/cardInner" />
+            <View
+                android:id="@+id/divider"
+                android:layout_width="265dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_to"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:autofillHints="city, country"
-        android:digits="абвгдеёжзийклмнопрстуфхцчшщъыьэюя АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,1234567890"
-        android:ems="12"
-        android:hint="Куда - Турция"
-        android:inputType="text"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@+id/cardInner"
-        app:layout_constraintStart_toStartOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <EditText
+                android:id="@+id/et_from"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:autofillHints="city, country"
+                android:digits="абвгдеёжзийклмнопрстуфхцчшщъыьэюя АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,1234567890"
+                android:ems="12"
+                android:hint="Откуда - Москва"
+                android:inputType="text"
+                android:singleLine="true"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="@+id/divider"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_to"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:autofillHints="city, country"
+                android:digits="абвгдеёжзийклмнопрстуфхцчшщъыьэюя АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,1234567890"
+                android:ems="12"
+                android:hint="Куда - Турция"
+                android:inputType="text"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tv_music_tickets"

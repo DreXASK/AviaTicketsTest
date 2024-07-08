@@ -1,4 +1,4 @@
-package com.drexask.effectivemobiletickets.ui
+package com.drexask.effectivemobiletickets.presentation.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

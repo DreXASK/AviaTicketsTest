@@ -1,21 +1,11 @@
-package com.drexask.effectivemobiletickets.ui
+package com.drexask.effectivemobiletickets.presentation.ui.activity
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.drexask.effectivemobiletickets.R
 import com.drexask.effectivemobiletickets.databinding.ActivityMainBinding
-import com.drexask.musicflights.domain.usecase.GetMusicFlightsUseCase
-import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

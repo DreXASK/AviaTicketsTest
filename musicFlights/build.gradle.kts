@@ -51,5 +51,5 @@ dependencies {
     implementation(libs.kotlinx.serialization)
 
     implementation(project(":core"))
-    implementation(project(":NetworkModule"))
+    implementation(project(":networkModule"))
 }

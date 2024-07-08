@@ -14,7 +14,7 @@ class MusicFlightsRepositoryImpl @Inject constructor(
         try {
             val data = musicFlightsService.getMusicFlights("1o1nX3uFISrG1gR-jr_03Qlu4_KEZWhav", "download")
             return Result.success(data.offers)
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             return Result.failure(e)
         }
     }

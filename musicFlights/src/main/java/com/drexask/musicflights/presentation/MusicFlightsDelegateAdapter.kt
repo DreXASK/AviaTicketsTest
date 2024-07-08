@@ -1,5 +1,6 @@
 package com.drexask.musicflights.presentation
 
+import com.drexask.core.presentation.utils.applyPriceDecorator
 import com.drexask.musicflights.R
 import com.drexask.musicflights.databinding.CardMusicFlightBinding
 import com.drexask.musicflights.domain.model.MusicFlightDto
@@ -19,7 +20,7 @@ class MusicFlightsDelegateAdapter:
         tvTitle.text = item.title
         tvTown.text = item.town
         ivIcon.setImageResource(R.drawable.ic_plane)
-        tvPrice.text = "от ${item.price.value} ₽"
+        tvPrice.text = root.context.getString(R.string.price_text, item.price.value.toString().applyPriceDecorator())
     }
 
         override fun MusicFlightDto.getItemId(): Any = title

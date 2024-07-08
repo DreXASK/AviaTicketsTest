@@ -7,8 +7,9 @@
     <string name="nearest">Короче</string>
     <string name="subscriptions">Подписки</string>
     <string name="user_profile">Профиль</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- AviaTicketsFragment -->
+    <string name="downloading_error">Downloading error, %1$s</string>
 
 
 </resources>

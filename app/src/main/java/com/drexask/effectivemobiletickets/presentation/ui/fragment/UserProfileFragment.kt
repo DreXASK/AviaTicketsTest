@@ -1,4 +1,4 @@
-package com.drexask.effectivemobiletickets.ui
+package com.drexask.effectivemobiletickets.presentation.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.drexask.effectivemobiletickets.R
 
-
-class HotelsFragment : Fragment() {
+class UserProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_hotels, container, false)
+        return inflater.inflate(R.layout.fragment_user_profile, container, false)
     }
 }

@@ -23,5 +23,4 @@ rootProject.name = "Effective Mobile Tickets"
 include(":app")
 include(":musicFlights")
 include(":core")
-include(":NetworkModule")
-include(":domain")
+include(":networkModule")
