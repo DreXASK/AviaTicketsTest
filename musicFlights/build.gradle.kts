@@ -43,15 +43,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.retrofit)
-
-    implementation(libs.hilt.dagger)
-    implementation(libs.hilt.common)
-    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.delegate.adapter)
 
     implementation(libs.kotlinx.serialization)
 
     implementation(project(":core"))
+    implementation(project(":NetworkModule"))
 }

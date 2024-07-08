@@ -12,9 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.drexask.effectivemobiletickets.R
 import com.drexask.effectivemobiletickets.databinding.ActivityMainBinding
+import com.drexask.musicflights.domain.usecase.GetMusicFlightsUseCase
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null

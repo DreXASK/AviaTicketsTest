@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -47,11 +48,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    implementation(libs.retrofit)
-
-    implementation(libs.hilt.dagger)
-    implementation(libs.hilt.common)
-    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
