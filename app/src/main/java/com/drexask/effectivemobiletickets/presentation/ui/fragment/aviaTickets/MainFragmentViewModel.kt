@@ -1,21 +1,17 @@
-package com.drexask.effectivemobiletickets.presentation.ui.fragment.aviaTicketsFragment
+package com.drexask.effectivemobiletickets.presentation.ui.fragment.aviaTickets
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.viewModelScope
-import com.drexask.effectivemobiletickets.R
 import com.drexask.musicflights.domain.model.MusicFlightDto
 import com.drexask.musicflights.domain.usecase.GetMusicFlightsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AviaTicketsFragmentViewModel @Inject constructor(
+class MainFragmentViewModel @Inject constructor(
     private val getMusicFlightsUseCase: GetMusicFlightsUseCase
 ): ViewModel() {
 

@@ -11,7 +11,7 @@
         android:id="@+id/iv_musician"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:background="@drawable/round_rectangle_shape_16dp"
+        android:background="@drawable/shape_round_rectangle_16dp"
         android:outlineProvider="background"
         tools:srcCompat="@tools:sample/avatars" />
 

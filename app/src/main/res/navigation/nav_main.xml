@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/aviaTicketsFragment"
-        android:name="com.drexask.effectivemobiletickets.presentation.ui.fragment.aviaTicketsFragment.AviaTicketsFragment"
+        android:name="com.drexask.effectivemobiletickets.presentation.ui.fragment.aviaTickets.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_avia_tickets" />
+        tools:layout="@layout/fragment_avia_tickets_main" />
     <fragment
         android:id="@+id/hotelsFragment"
         android:name="com.drexask.effectivemobiletickets.presentation.ui.fragment.HotelsFragment"

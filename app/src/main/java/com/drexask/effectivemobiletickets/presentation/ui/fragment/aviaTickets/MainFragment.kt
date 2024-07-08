@@ -1,4 +1,4 @@
-package com.drexask.effectivemobiletickets.presentation.ui.fragment.aviaTicketsFragment
+package com.drexask.effectivemobiletickets.presentation.ui.fragment.aviaTickets
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drexask.effectivemobiletickets.databinding.FragmentAviaTicketsBinding
 import com.drexask.core.presentation.utils.SpaceItemDecoration
-import com.drexask.core.presentation.utils.applyPriceDecorator
 import com.drexask.musicflights.presentation.MusicFlightsDelegateAdapter
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,13 +20,12 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class AviaTicketsFragment: Fragment() {
+class MainFragment: Fragment() {
 
     private var _binding: FragmentAviaTicketsBinding? = null
-    private val bd: FragmentAviaTicketsBinding
-        get() = _binding!!
+    private val bd: FragmentAviaTicketsBinding get() = _binding!!
 
-    private val viewModel: AviaTicketsFragmentViewModel by viewModels()
+    private val viewModel: MainFragmentViewModel by viewModels()
     private var adapter: CompositeDelegateAdapter? = CompositeDelegateAdapter(MusicFlightsDelegateAdapter())
 
     override fun onCreateView(
@@ -62,8 +60,8 @@ class AviaTicketsFragment: Fragment() {
         bd.musicFlightsRecycler.addItemDecoration(SpaceItemDecoration(100))
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
         adapter = null
     }
