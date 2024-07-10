@@ -11,7 +11,8 @@
         android:id="@+id/constraint_layout_state_default"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible"
+        tools:visibility="gone">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_header"
@@ -146,15 +147,16 @@
         android:id="@+id/constraint_layout_state_destination_selected"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         tools:visibility="visible">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_fields_destination_selected"
+            style="@style/Base.Widget.Material3.CardView.Custom"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="40dp"
-            style="@style/Base.Widget.Material3.CardView.Custom"
             app:cardBackgroundColor="@color/grey_3"
             app:cardElevation="24dp"
             app:cardMaxElevation="36dp"
@@ -189,8 +191,8 @@
                     app:layout_constraintStart_toEndOf="@+id/iv_go_back"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/et_departure_destination_selected"
+                <TextView
+                    android:id="@+id/tv_departure_destination_selected"
                     style="@style/text_button_text1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -198,14 +200,14 @@
                     android:singleLine="true"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toTopOf="@+id/divider_destination_selected"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView_destination_selected"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_reverse_destination_selected"
                     app:layout_constraintStart_toStartOf="@+id/divider_destination_selected"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.65"
                     tools:text="Минск" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/et_destination_destination_selected"
+                <TextView
+                    android:id="@+id/tv_destination_destination_selected"
                     style="@style/text_button_text1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -223,19 +225,19 @@
                     android:id="@+id/iv_clear_text_field_destination_selected"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/et_destination_destination_selected"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_destination_destination_selected"
                     app:layout_constraintEnd_toEndOf="@+id/divider_destination_selected"
-                    app:layout_constraintTop_toTopOf="@+id/et_destination_destination_selected"
+                    app:layout_constraintTop_toTopOf="@+id/tv_destination_destination_selected"
                     app:srcCompat="@drawable/ic_cross" />
 
                 <ImageView
-                    android:id="@+id/imageView_destination_selected"
+                    android:id="@+id/iv_reverse_destination_selected"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_two_counter_arrows"
-                    app:layout_constraintBottom_toBottomOf="@+id/et_departure_destination_selected"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_departure_destination_selected"
                     app:layout_constraintEnd_toEndOf="@+id/divider_destination_selected"
-                    app:layout_constraintTop_toTopOf="@+id/et_departure_destination_selected" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_departure_destination_selected" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -245,7 +247,7 @@
             android:id="@+id/horizontalScrollView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:clipToPadding="false"
             android:paddingHorizontal="25dp"
             android:scrollbars="none"
@@ -259,18 +261,22 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_ticket_to_back_destination_selected"
                     style="@style/ThemeOverlay.Material3.Button.CustomButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:textAppearance="@style/text_title4"
                     android:text="обратно"
                     app:icon="@drawable/ic_plus" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_select_date__destination_selected"
                     style="@style/ThemeOverlay.Material3.Button.CustomButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:textAppearance="@style/text_title4"
                     tools:text="24 фев, сб" />
 
                 <com.google.android.material.button.MaterialButton
@@ -278,6 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:textAppearance="@style/text_title4"
                     android:text="1, эконом"
                     app:icon="@drawable/ic_user_profile" />
 
@@ -285,23 +292,25 @@
                     style="@style/ThemeOverlay.Material3.Button.CustomButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="@style/text_title4"
                     android:text="фильтры"
                     app:icon="@drawable/ic_filters" />
 
             </LinearLayout>
         </HorizontalScrollView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardview_direct_flights_destination_selected"
+            style="@style/Base.Widget.Material3.CardView.Custom"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="25dp"
+            app:cardBackgroundColor="@color/grey_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-            style="@style/Base.Widget.Material3.CardView.Custom" >
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -321,10 +330,79 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_direct_flights_destination_selected"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/card_direct_flight" />
+
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_all_tickets_destination_selected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/shape_round_rectangle_12dp"
+            app:backgroundTint="@color/special_blue"
+            android:text="Посмотреть все билеты"
+            android:textAppearance="@style/text_button_text1"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardview_direct_flights_destination_selected" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            app:cardBackgroundColor="@color/grey_2"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_all_tickets_destination_selected">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_bell_destination_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_bell"
+                    app:tint="@color/special_blue" />
+
+                <TextView
+                    android:id="@+id/tv_price_subscribe_destination_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    style="@style/text_text1"
+                    android:text="Подписка на цену"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_bell_destination_selected"
+                    app:layout_constraintStart_toEndOf="@+id/iv_bell_destination_selected"
+                    app:layout_constraintTop_toTopOf="@+id/iv_bell_destination_selected" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_price_subscription_destination_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

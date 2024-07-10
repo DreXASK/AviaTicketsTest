@@ -146,7 +146,7 @@
         app:layout_constraintStart_toEndOf="@+id/btn_weekend"
         app:layout_constraintTop_toBottomOf="@+id/card_search" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tv_complex_route"
         style="@style/text_text2"
         android:layout_width="wrap_content"
@@ -158,7 +158,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_complex_route"
         app:layout_constraintTop_toBottomOf="@+id/btn_complex_route" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tv_to_anywhere"
         style="@style/text_text2"
         android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_to_anywhere"
         app:layout_constraintTop_toBottomOf="@+id/btn_to_anywhere" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tv_weekend"
         style="@style/text_text2"
         android:layout_width="wrap_content"
@@ -180,7 +180,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_weekend"
         app:layout_constraintTop_toBottomOf="@+id/btn_weekend" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tv_hot_tickets"
         style="@style/text_text2"
         android:layout_width="wrap_content"

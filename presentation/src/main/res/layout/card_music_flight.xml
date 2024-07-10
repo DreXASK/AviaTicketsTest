@@ -15,21 +15,19 @@
         android:outlineProvider="background"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tv_title"
         style="@style/text_title3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="5dp"
-        android:text="TextView"
         tools:text="Die Antwoord" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tv_town"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/text_text2"
-        android:text="TextView"
         tools:text="Будапешт" />
 
     <LinearLayout
@@ -45,13 +43,12 @@
             app:tint="@color/grey_6"
             tools:srcCompat="@drawable/ic_plane" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/tv_price"
             style="@style/text_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="TextView"
             tools:text="от 22 264 ₽" />
 
     </LinearLayout>

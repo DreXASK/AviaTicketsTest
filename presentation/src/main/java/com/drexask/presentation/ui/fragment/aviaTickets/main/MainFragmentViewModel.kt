@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,14 +20,14 @@ class MainFragmentViewModel @Inject constructor(
 ): ViewModel() {
 
     internal val screenState = MutableStateFlow(ScreenState.DEFAULT)
-
-    internal val editTextData = MutableStateFlow(FieldsData(null, null))
+    internal val editTextsDataState = MutableStateFlow(EditTextsData(null, null))
+    internal val dateOfFlightState = MutableStateFlow(LocalDate.now())
 
     private val _musicFlights: MutableStateFlow<List<MusicFlight>> = MutableStateFlow(emptyList())
     internal val musicFlights = _musicFlights.asStateFlow()
 
-    private val _errorToastFlow = MutableSharedFlow<Error>()
-    internal val errorToastFlow = _errorToastFlow.asSharedFlow()
+    private val _errorToasts = MutableSharedFlow<Error>()
+    internal val errorToast = _errorToasts.asSharedFlow()
 
     init {
         viewModelScope.launch {
@@ -36,9 +37,16 @@ class MainFragmentViewModel @Inject constructor(
                 _musicFlights.value = result.getOrNull()!!
             } else {
                 result.exceptionOrNull()?.printStackTrace()
-                _errorToastFlow.emit(Error.DOWNLOADING_ERROR)
+                _errorToasts.emit(Error.DOWNLOADING_ERROR)
             }
         }
+    }
+
+    internal fun clearDestination() {
+        editTextsDataState.value = editTextsDataState.value.copy(
+            destinationPlaceText = ""
+        )
+        screenState.value = ScreenState.DEFAULT
     }
 
     internal enum class Error {
@@ -52,7 +60,7 @@ class MainFragmentViewModel @Inject constructor(
 
 }
 
-internal data class FieldsData(
+internal data class EditTextsData(
     val departurePlaceText: String?,
     val destinationPlaceText: String?
 )

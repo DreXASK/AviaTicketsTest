@@ -8,27 +8,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drexask.domain.model.PopularDestination
 import com.drexask.presentation.R
 import com.drexask.presentation.databinding.FragmentAviaTicketsDestinationBottomSheetBinding
+import com.drexask.presentation.ui.DEPARTURE_CACHE
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DestinationBottomSheetFragment(private val departureText: String, @LayoutRes layoutRes: Int) :
+class DestinationBottomSheetFragment(@LayoutRes layoutRes: Int) :
     BottomSheetDialogFragment(layoutRes) {
 
     private var _binding: FragmentAviaTicketsDestinationBottomSheetBinding? = null
     private val bd get() = _binding!!
 
-    private val viewModel by viewModels<MainFragmentViewModel>()
+    private val viewModel: MainFragmentViewModel by activityViewModels()
     private var adapter: CompositeDelegateAdapter? = null
 
     override fun onCreateView(
@@ -40,9 +47,9 @@ class DestinationBottomSheetFragment(private val departureText: String, @LayoutR
 
         _binding = view?.let { FragmentAviaTicketsDestinationBottomSheetBinding.bind(it) }
 
-        bd.etDeparture.setText(departureText)
         setupRecyclerView()
         setupListeners()
+        setupObservers()
 
         return view
     }
@@ -74,6 +81,32 @@ class DestinationBottomSheetFragment(private val departureText: String, @LayoutR
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
 
+        tryChangeMainFragmentStateToSelected()
+        saveEditTextsToState()
+        cacheDepartureFieldValue()
+    }
+
+    private fun saveEditTextsToState() {
+        viewModel.editTextsDataState.value = EditTextsData(
+            departurePlaceText = bd.etDeparture.text.toString(),
+            destinationPlaceText = bd.etDestination.text.toString()
+        )
+    }
+
+    private fun cacheDepartureFieldValue() {
+        if (bd.etDeparture.text.isNullOrBlank())
+            return
+
+        val sharedPrefs = context?.let { PreferenceManager.getDefaultSharedPreferences(it) }
+
+        sharedPrefs?.let { prefs ->
+            val editor = prefs.edit()
+            editor.putString(DEPARTURE_CACHE, bd.etDeparture.text.toString())
+            editor.apply()
+        }
+    }
+
+    private fun tryChangeMainFragmentStateToSelected() {
         if(bd.etDeparture.text.isNotBlank() && bd.etDestination.text.isNotBlank()) {
             viewModel.screenState.value = MainFragmentViewModel.ScreenState.DESTINATION_SELECTED
         }
@@ -109,6 +142,25 @@ class DestinationBottomSheetFragment(private val departureText: String, @LayoutR
         )
 
         adapter?.swapData(popularDestinationData)
+    }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                editTextsObserver()
+            }
+        }
+    }
+
+    private suspend fun editTextsObserver() {
+        viewModel.editTextsDataState.collectLatest {
+            it.departurePlaceText?.let { departureText ->
+                bd.etDeparture.setText(departureText)
+            }
+            it.destinationPlaceText?.let { destinationText ->
+                bd.etDestination.setText(destinationText)
+            }
+        }
     }
 
     private fun setupListeners() {

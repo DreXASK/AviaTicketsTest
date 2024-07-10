@@ -1,27 +1,35 @@
 package com.drexask.presentation.ui.fragment.aviaTickets.main
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.preference.PreferenceManager
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drexask.presentation.R
 import com.drexask.presentation.databinding.FragmentAviaTicketsMainBinding
+import com.drexask.presentation.ui.DEPARTURE_CACHE
 import com.drexask.presentation.utils.SpaceItemDecoration
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.TextStyle
+import java.util.Locale
 
-private const val DEPARTURE_CACHE = "DEPARTURE_CACHE"
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -29,7 +37,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentAviaTicketsMainBinding? = null
     private val bd: FragmentAviaTicketsMainBinding get() = _binding!!
 
-    private val viewModel: MainFragmentViewModel by viewModels()
+    private val viewModel: MainFragmentViewModel by activityViewModels()
     private var recyclerAdapter: CompositeDelegateAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +56,7 @@ class MainFragment : Fragment() {
         setupRecyclerView()
         setupObservers()
         setupListeners()
-
+        setupTextViews()
 
         return bd.root
     }
@@ -57,13 +65,22 @@ class MainFragment : Fragment() {
         val sharedPrefs = context?.let { PreferenceManager.getDefaultSharedPreferences(it) }
         sharedPrefs?.let { prefs ->
             val departureCachedText = prefs.getString(DEPARTURE_CACHE, "")
-            viewModel.editTextData.value = viewModel.editTextData.value.copy(
+            viewModel.editTextsDataState.value = viewModel.editTextsDataState.value.copy(
                 departurePlaceText = departureCachedText
             )
         }
     }
 
     private fun setupObservers() {
+
+        // Common states -----------------------------------------
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                editTextsObserver()
+            }
+        }
+
+        // DEFAULT state -----------------------------------------
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 musicFlightsObserver()
@@ -76,7 +93,13 @@ class MainFragment : Fragment() {
         }
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                editTextsObserver()
+                screenStateObserver()
+            }
+        }
+        // DESTINATION_SELECTED state ----------------------------
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                dateOfFlightObserver()
             }
         }
     }
@@ -88,7 +111,7 @@ class MainFragment : Fragment() {
     }
 
     private suspend fun toastObserver() {
-        viewModel.errorToastFlow.collectLatest { errorType ->
+        viewModel.errorToast.collectLatest { errorType ->
             val errorMessage = when (errorType) {
                 MainFragmentViewModel.Error.DOWNLOADING_ERROR -> getString(R.string.downloading_error)
             }
@@ -97,24 +120,38 @@ class MainFragment : Fragment() {
     }
 
     private suspend fun editTextsObserver() {
-        viewModel.editTextData.collectLatest {
+        viewModel.editTextsDataState.collectLatest {
             it.departurePlaceText?.let { departureText ->
                 bd.etDeparture.setText(departureText)
+                bd.tvDepartureDestinationSelected.text = departureText
             }
             it.destinationPlaceText?.let { destinationText ->
                 bd.etDestination.setText(destinationText)
+                bd.tvDestinationDestinationSelected.text = destinationText
             }
         }
     }
 
     private suspend fun screenStateObserver() {
         viewModel.screenState.collectLatest {
-            when(it) {
+            when (it) {
                 MainFragmentViewModel.ScreenState.DEFAULT -> {
-
+                    bd.constraintLayoutStateDefault.visibility = View.VISIBLE
+                    bd.constraintLayoutStateDestinationSelected.visibility = View.GONE
                 }
-                MainFragmentViewModel.ScreenState.DESTINATION_SELECTED -> TODO()
+
+                MainFragmentViewModel.ScreenState.DESTINATION_SELECTED -> {
+                    bd.constraintLayoutStateDefault.visibility = View.GONE
+                    bd.constraintLayoutStateDestinationSelected.visibility = View.VISIBLE
+                }
             }
+        }
+    }
+
+    private suspend fun dateOfFlightObserver() {
+        viewModel.dateOfFlightState.collectLatest {
+            val spannableString = getSpannableStringOfDate(it)
+            bd.btnSelectDateDestinationSelected.text = spannableString
         }
     }
 
@@ -128,32 +165,119 @@ class MainFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        destinationOnClick()
+        // DEFAULT state
+        clickOnDestination()
+        // DESTINATION_SELECTED state ----------------------------
+        clickReverseDepartureDestination()
+        clickClearDestination()
+        clickGoBack()
+        clickSelectBackFlightDate()
+        clickSelectFlightDate()
     }
 
-    private fun destinationOnClick() {
+    private fun clickOnDestination() {
         bd.etDestination.setOnClickListener {
-            cacheDepartureFieldValue()
+            saveEditTextsToState()
             showDestinationDialog()
         }
     }
 
-    private fun cacheDepartureFieldValue() {
-        if (bd.etDeparture.text.isNullOrBlank())
-            return
-
-        val sharedPrefs = context?.let { PreferenceManager.getDefaultSharedPreferences(it) }
-
-        sharedPrefs?.let { prefs ->
-            val editor = prefs.edit()
-            editor.putString(DEPARTURE_CACHE, bd.etDeparture.text.toString())
-            editor.apply()
+    private fun clickReverseDepartureDestination() {
+        bd.ivReverseDestinationSelected.setOnClickListener {
+            viewModel.apply {
+                editTextsDataState.value = editTextsDataState.value.copy(
+                    departurePlaceText = editTextsDataState.value.destinationPlaceText,
+                    destinationPlaceText = editTextsDataState.value.departurePlaceText
+                )
+            }
         }
+    }
+
+    private fun clickClearDestination() {
+        bd.ivClearTextFieldDestinationSelected.setOnClickListener {
+            viewModel.clearDestination()
+        }
+    }
+
+    private fun clickGoBack() {
+        bd.ivGoBack.setOnClickListener {
+            viewModel.clearDestination()
+        }
+    }
+
+    private fun clickSelectBackFlightDate() {
+        bd.btnTicketToBackDestinationSelected.setOnClickListener {
+            context?.let { context ->
+                val datePickerDialog = DatePickerDialog(context)
+                datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
+                    Toast.makeText(context, "Выбран обратный билет. Дата - ${dayOfMonth}.${month}.${year}", Toast.LENGTH_LONG).show()
+                }
+                datePickerDialog.show()
+            }
+
+        }
+    }
+
+    private fun clickSelectFlightDate() {
+        bd.btnSelectDateDestinationSelected.setOnClickListener {
+            context?.let { context ->
+                val datePickerDialog = DatePickerDialog(context)
+                datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
+                    viewModel.dateOfFlightState.value = LocalDate.of(year, month+1, dayOfMonth) // month is starting from 0 in datePickerDialog
+                }
+                datePickerDialog.show()
+            }
+        }
+    }
+
+    private fun setupTextViews() {
+        // DESTINATION_SELECTED state ----------------------------
+        setupFlightDateTextView()
+    }
+
+    private fun setupFlightDateTextView() {
+        val currentDate = LocalDate.now()
+        val spannableString = getSpannableStringOfDate(currentDate)
+        bd.btnSelectDateDestinationSelected.text = spannableString
+    }
+
+    private fun getSpannableStringOfDate(date: LocalDate): SpannableString {
+        val locale = Locale.getDefault()
+
+        val monthName = date.month.getDisplayName(
+            TextStyle.SHORT,
+            locale
+        )
+        val dayOfWeekName = date.dayOfWeek.getDisplayName(
+            TextStyle.SHORT,
+            locale
+        )
+        val dateString = "${date.dayOfMonth} $monthName, $dayOfWeekName"
+        val dateStringWithoutPoint = dateString.replace(".", "")
+
+        val spannableString = SpannableString(dateStringWithoutPoint)
+
+        val indexOfComma = spannableString.indexOf(",")
+        context?.let { context ->
+            spannableString.setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(context, R.color.grey_6)),
+                indexOfComma,
+                spannableString.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        return spannableString
+    }
+
+    private fun saveEditTextsToState() {
+        viewModel.editTextsDataState.value = EditTextsData(
+            departurePlaceText = bd.etDeparture.text.toString(),
+            destinationPlaceText = bd.etDestination.text.toString()
+        )
     }
 
     private fun showDestinationDialog() {
         val dialog = DestinationBottomSheetFragment(
-            bd.etDeparture.text.toString(),
             R.layout.fragment_avia_tickets_destination_bottom_sheet
         )
         dialog.show(childFragmentManager, null)

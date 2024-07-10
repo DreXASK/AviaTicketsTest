@@ -7,9 +7,10 @@
     android:orientation="vertical"
     tools:context="com.drexask.presentation.ui.fragment.aviaTickets.placeholders.HotTicketsFragment">
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/text_title1"
         android:text="Горячие билеты" />
 
     <Button
