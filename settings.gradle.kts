@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Effective Mobile Tickets"
 include(":app")
-include(":musicFlights")
-include(":core")
 include(":networkModule")
+include(":presentation")
+include(":data")
+include(":domain")

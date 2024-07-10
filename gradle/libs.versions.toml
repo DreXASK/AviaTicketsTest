@@ -16,6 +16,7 @@ navigation = "2.7.7"
 delegate_adapter = "4.2"
 kotlinx_serialization = "1.7.1"
 jetbrainsKotlinJvm = "2.0.0"
+preference = "1.2.1"
 
 
 [libraries]
@@ -27,6 +28,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-preference = { module = "androidx.preference:preference", version.ref = "preference" }
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-kotlinx-converter = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref="retrofit" }

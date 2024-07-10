@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_musician"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="@drawable/shape_round_rectangle_16dp"
+        android:outlineProvider="background"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/text_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:text="TextView"
+        tools:text="Die Antwoord" />
+
+    <TextView
+        android:id="@+id/tv_town"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_text2"
+        android:text="TextView"
+        tools:text="Будапешт" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tint="@color/grey_6"
+            tools:srcCompat="@drawable/ic_plane" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            style="@style/text_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="TextView"
+            tools:text="от 22 264 ₽" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

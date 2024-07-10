@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout_outer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_background">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_search"
+        style="@style/Base.Widget.Material3.CardView.Custom"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        app:cardBackgroundColor="@color/grey_3"
+        app:cardElevation="24dp"
+        app:cardMaxElevation="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_departure"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                app:layout_constraintStart_toStartOf="@+id/divider"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_plane_with_wing" />
+
+            <ImageView
+                android:id="@+id/iv_destination"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_magnifier"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:tint="@color/grey_6" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_departure"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="6dp"
+                android:autofillHints="city, country"
+                android:digits="абвгдеёжзийклмнопрстуфхцчшщъыьэюя АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,1234567890"
+                android:ems="12"
+                android:hint="Откуда - Москва"
+                android:inputType="text"
+                android:singleLine="true"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                app:layout_constraintStart_toEndOf="@+id/iv_departure"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_destination"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:autofillHints="city, country"
+                android:digits="абвгдеёжзийклмнопрстуфхцчшщъыьэюя АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,1234567890"
+                android:ems="12"
+                android:hint="Куда - Турция"
+                android:inputType="text"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_destination"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+            <ImageView
+                android:id="@+id/iv_clear_text_field"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/et_destination"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:srcCompat="@drawable/ic_cross" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/btn_complex_route"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/img_complex_route"
+        app:layout_constraintEnd_toStartOf="@+id/btn_to_anywhere"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_search" />
+
+    <ImageButton
+        android:id="@+id/btn_to_anywhere"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/img_to_anywhere"
+        app:layout_constraintEnd_toStartOf="@+id/btn_weekend"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_complex_route"
+        app:layout_constraintTop_toBottomOf="@+id/card_search" />
+
+    <ImageButton
+        android:id="@+id/btn_weekend"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/img_weekend"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hot_tickets"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_to_anywhere"
+        app:layout_constraintTop_toBottomOf="@+id/card_search" />
+
+    <ImageButton
+        android:id="@+id/btn_hot_tickets"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/img_hot_tickets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_weekend"
+        app:layout_constraintTop_toBottomOf="@+id/card_search" />
+
+    <TextView
+        android:id="@+id/tv_complex_route"
+        style="@style/text_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/complex_route"
+        app:layout_constraintEnd_toEndOf="@+id/btn_complex_route"
+        app:layout_constraintStart_toStartOf="@+id/btn_complex_route"
+        app:layout_constraintTop_toBottomOf="@+id/btn_complex_route" />
+
+    <TextView
+        android:id="@+id/tv_to_anywhere"
+        style="@style/text_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/to_anywhere"
+        app:layout_constraintEnd_toEndOf="@+id/btn_to_anywhere"
+        app:layout_constraintStart_toStartOf="@+id/btn_to_anywhere"
+        app:layout_constraintTop_toBottomOf="@+id/btn_to_anywhere" />
+
+    <TextView
+        android:id="@+id/tv_weekend"
+        style="@style/text_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/weekend"
+        app:layout_constraintEnd_toEndOf="@+id/btn_weekend"
+        app:layout_constraintStart_toStartOf="@+id/btn_weekend"
+        app:layout_constraintTop_toBottomOf="@+id/btn_weekend" />
+
+    <TextView
+        android:id="@+id/tv_hot_tickets"
+        style="@style/text_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/hot_tickets"
+        app:layout_constraintEnd_toEndOf="@+id/btn_hot_tickets"
+        app:layout_constraintStart_toStartOf="@+id/btn_hot_tickets"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hot_tickets" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_popular_destinations"
+        style="@style/Base.Widget.Material3.CardView.Custom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/grey_3"
+        app:layout_constraintEnd_toEndOf="@+id/card_search"
+        app:layout_constraintStart_toStartOf="@+id/card_search"
+        app:layout_constraintTop_toBottomOf="@+id/tv_complex_route">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_popular_destinations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="15dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/card_popular_destination" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
