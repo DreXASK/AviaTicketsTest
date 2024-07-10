@@ -21,6 +21,7 @@ class FlightsFragment : Fragment() {
         _binding = FragmentFlightsBinding.inflate(layoutInflater)
 
         return bd.root
+        TODO("Удалить, если не потребуется")
     }
 
     override fun onDestroyView() {

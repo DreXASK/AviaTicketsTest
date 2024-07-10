@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.fragment.aviaTickets.placeholders.ComplexRouteFragment">
+    tools:context="com.drexask.presentation.ui.fragment.aviaTickets.placeholders.HotTicketsFragment">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Горячие билеты" />

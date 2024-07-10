@@ -32,6 +32,13 @@ class MainFragment : Fragment() {
     private val viewModel: MainFragmentViewModel by viewModels()
     private var recyclerAdapter: CompositeDelegateAdapter? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        restoreCachedValues()
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,15 +48,18 @@ class MainFragment : Fragment() {
         setupRecyclerView()
         setupObservers()
         setupListeners()
-        setupCachedValues()
+
 
         return bd.root
     }
 
-    private fun setupCachedValues() {
+    private fun restoreCachedValues() {
         val sharedPrefs = context?.let { PreferenceManager.getDefaultSharedPreferences(it) }
         sharedPrefs?.let { prefs ->
-            bd.etDeparture.setText(prefs.getString(DEPARTURE_CACHE, ""))
+            val departureCachedText = prefs.getString(DEPARTURE_CACHE, "")
+            viewModel.editTextData.value = viewModel.editTextData.value.copy(
+                departurePlaceText = departureCachedText
+            )
         }
     }
 
@@ -62,6 +72,11 @@ class MainFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 toastObserver()
+            }
+        }
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                editTextsObserver()
             }
         }
     }
@@ -77,8 +92,29 @@ class MainFragment : Fragment() {
             val errorMessage = when (errorType) {
                 MainFragmentViewModel.Error.DOWNLOADING_ERROR -> getString(R.string.downloading_error)
             }
-
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private suspend fun editTextsObserver() {
+        viewModel.editTextData.collectLatest {
+            it.departurePlaceText?.let { departureText ->
+                bd.etDeparture.setText(departureText)
+            }
+            it.destinationPlaceText?.let { destinationText ->
+                bd.etDestination.setText(destinationText)
+            }
+        }
+    }
+
+    private suspend fun screenStateObserver() {
+        viewModel.screenState.collectLatest {
+            when(it) {
+                MainFragmentViewModel.ScreenState.DEFAULT -> {
+
+                }
+                MainFragmentViewModel.ScreenState.DESTINATION_SELECTED -> TODO()
+            }
         }
     }
 

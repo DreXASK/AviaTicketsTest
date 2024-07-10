@@ -15,8 +15,18 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="ThemeOverlay.Material3.Button.CustomButton">
+        <item name="backgroundTint">@color/grey_3</item>
+        <item name="iconGravity">start</item>
+        <item name="android:paddingHorizontal">10dp</item>
+        <item name="iconTint">@color/grey_7</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:textAppearance">@style/text_title4</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="text_title1" >
-        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontFamily">@font/sf_pro_display_semibold</item>
         <item name="fontWeight">600</item>
         <item name="android:textSize">22sp</item>
         <item name="borderWidth">1dp</item>
@@ -26,13 +36,13 @@
     </style>
 
     <style name="text_title2" >
-        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontFamily">@font/sf_pro_display_semibold</item>
         <item name="fontWeight">600</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="text_title3" >
-        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontFamily">@font/sf_pro_display_semibold</item>
         <item name="fontWeight">600</item>
         <item name="android:textSize">16sp</item>
         <item name="borderWidth">1dp</item>
@@ -42,7 +52,7 @@
     </style>
 
     <style name="text_title4" >
-        <item name="font">@font/sf_pro_display_medium_italic</item>
+        <item name="fontFamily">@font/sf_pro_display_medium_italic</item>
         <item name="fontWeight">400</item>
         <item name="android:textSize">14sp</item>
         <item name="borderWidth">1dp</item>
@@ -52,7 +62,7 @@
     </style>
 
     <style name="text_text1" >
-        <item name="font">@font/sf_pro_display_regular</item>
+        <item name="fontFamily">@font/sf_pro_display_regular</item>
         <item name="fontWeight">400</item>
         <item name="android:textSize">16sp</item>
         <item name="borderWidth">1dp</item>
@@ -62,19 +72,19 @@
     </style>
 
     <style name="text_text2" >
-        <item name="font">@font/sf_pro_display_regular</item>
+        <item name="fontFamily">@font/sf_pro_display_regular</item>
         <item name="fontWeight">400</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="text_button_text1" >
-        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontFamily">@font/sf_pro_display_semibold</item>
         <item name="fontWeight">600</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="text_tab_text" >
-        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontFamily">@font/sf_pro_display_semibold</item>
         <item name="fontWeight">400</item>
         <item name="android:textSize">10sp</item>
     </style>

@@ -33,7 +33,7 @@
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_city"
                 style="@style/text_title3"
                 android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                 android:textColor="@color/white"
                 tools:text="Стамбул" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_info"
                 style="@style/text_text2"
                 android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.drexask.domain.model.PopularDestination
 import com.drexask.presentation.R
 import com.drexask.presentation.databinding.FragmentAviaTicketsDestinationBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -27,7 +28,7 @@ class DestinationBottomSheetFragment(private val departureText: String, @LayoutR
     private var _binding: FragmentAviaTicketsDestinationBottomSheetBinding? = null
     private val bd get() = _binding!!
 
-    private val viewModel by viewModels<DestinationBottomSheetFragmentViewModel>()
+    private val viewModel by viewModels<MainFragmentViewModel>()
     private var adapter: CompositeDelegateAdapter? = null
 
     override fun onCreateView(
@@ -74,7 +75,7 @@ class DestinationBottomSheetFragment(private val departureText: String, @LayoutR
         super.onDismiss(dialog)
 
         if(bd.etDeparture.text.isNotBlank() && bd.etDestination.text.isNotBlank()) {
-            findNavController().navigate(R.id.flightsFragment)
+            viewModel.screenState.value = MainFragmentViewModel.ScreenState.DESTINATION_SELECTED
         }
     }
 
@@ -89,7 +90,25 @@ class DestinationBottomSheetFragment(private val departureText: String, @LayoutR
         bd.rvPopularDestinations.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        adapter?.swapData(viewModel.popularDestinationData)
+        val popularDestinationData = listOf(
+            PopularDestination(
+                1,
+                "Стамбул",
+                "Популярное направление"
+            ),
+            PopularDestination(
+                2,
+                "Сочи",
+                "Популярное направление"
+            ),
+            PopularDestination(
+                3,
+                "Пхукет",
+                "Популярное направление"
+            )
+        )
+
+        adapter?.swapData(popularDestinationData)
     }
 
     private fun setupListeners() {

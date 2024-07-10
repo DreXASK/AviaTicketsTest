@@ -44,12 +44,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider"
                 app:tint="@color/grey_6" />
 
-            <View
+            <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="20dp"
                 android:background="?android:attr/listDivider"
+                android:backgroundTint="@color/grey_4"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -59,7 +60,7 @@
             <EditText
                 android:id="@+id/et_departure"
                 style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="6dp"
                 android:autofillHints="city, country"
@@ -75,7 +76,7 @@
             <EditText
                 android:id="@+id/et_destination"
                 style="@style/ThemeOverlay.Material3.TextInputEditText.Custom"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:autofillHints="city, country"
@@ -93,8 +94,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/et_destination"
+                app:layout_constraintEnd_toEndOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/divider"
                 app:srcCompat="@drawable/ic_cross" />
 
@@ -146,7 +146,7 @@
         app:layout_constraintStart_toEndOf="@+id/btn_weekend"
         app:layout_constraintTop_toBottomOf="@+id/card_search" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_complex_route"
         style="@style/text_text2"
         android:layout_width="wrap_content"
@@ -158,7 +158,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_complex_route"
         app:layout_constraintTop_toBottomOf="@+id/btn_complex_route" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_to_anywhere"
         style="@style/text_text2"
         android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_to_anywhere"
         app:layout_constraintTop_toBottomOf="@+id/btn_to_anywhere" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_weekend"
         style="@style/text_text2"
         android:layout_width="wrap_content"
@@ -180,7 +180,7 @@
         app:layout_constraintStart_toStartOf="@+id/btn_weekend"
         app:layout_constraintTop_toBottomOf="@+id/btn_weekend" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_hot_tickets"
         style="@style/text_text2"
         android:layout_width="wrap_content"

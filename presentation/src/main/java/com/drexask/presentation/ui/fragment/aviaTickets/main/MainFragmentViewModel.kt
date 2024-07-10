@@ -18,6 +18,10 @@ class MainFragmentViewModel @Inject constructor(
     private val musicFlightsRepository: MusicFlightsRepository
 ): ViewModel() {
 
+    internal val screenState = MutableStateFlow(ScreenState.DEFAULT)
+
+    internal val editTextData = MutableStateFlow(FieldsData(null, null))
+
     private val _musicFlights: MutableStateFlow<List<MusicFlight>> = MutableStateFlow(emptyList())
     internal val musicFlights = _musicFlights.asStateFlow()
 
@@ -41,4 +45,14 @@ class MainFragmentViewModel @Inject constructor(
         DOWNLOADING_ERROR
     }
 
+    internal enum class ScreenState {
+        DEFAULT,
+        DESTINATION_SELECTED
+    }
+
 }
+
+internal data class FieldsData(
+    val departurePlaceText: String?,
+    val destinationPlaceText: String?
+)

@@ -15,7 +15,7 @@
         android:outlineProvider="background"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
         style="@style/text_title3"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:text="TextView"
         tools:text="Die Antwoord" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_town"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:tint="@color/grey_6"
             tools:srcCompat="@drawable/ic_plane" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_price"
             style="@style/text_text2"
             android:layout_width="wrap_content"
