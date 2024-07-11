@@ -9,9 +9,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_state_default"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone">
 
         <com.google.android.material.textview.MaterialTextView
@@ -145,9 +149,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_state_destination_selected"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
         <androidx.cardview.widget.CardView
@@ -266,8 +274,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textAppearance="@style/text_title4"
                     android:text="обратно"
+                    android:textAppearance="@style/text_title4"
                     app:icon="@drawable/ic_plus" />
 
                 <com.google.android.material.button.MaterialButton
@@ -284,16 +292,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:textAppearance="@style/text_title4"
                     android:text="1, эконом"
+                    android:textAppearance="@style/text_title4"
                     app:icon="@drawable/ic_user_profile" />
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/ThemeOverlay.Material3.Button.CustomButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/text_title4"
                     android:text="фильтры"
+                    android:textAppearance="@style/text_title4"
                     app:icon="@drawable/ic_filters" />
 
             </LinearLayout>
@@ -346,17 +354,17 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="25dp"
             android:background="@drawable/shape_round_rectangle_12dp"
-            app:backgroundTint="@color/special_blue"
             android:text="Посмотреть все билеты"
             android:textAppearance="@style/text_button_text1"
             android:textColor="@color/white"
+            app:backgroundTint="@color/special_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardview_direct_flights_destination_selected" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="25dp"
@@ -375,18 +383,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_bell"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_bell"
                     app:tint="@color/special_blue" />
 
                 <TextView
                     android:id="@+id/tv_price_subscribe_destination_selected"
+                    style="@style/text_text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    style="@style/text_text1"
                     android:text="Подписка на цену"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_bell_destination_selected"

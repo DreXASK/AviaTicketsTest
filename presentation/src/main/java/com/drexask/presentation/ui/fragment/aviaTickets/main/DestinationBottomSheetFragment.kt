@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drexask.domain.model.PopularDestination
 import com.drexask.presentation.R
 import com.drexask.presentation.databinding.FragmentAviaTicketsDestinationBottomSheetBinding
-import com.drexask.presentation.ui.DEPARTURE_CACHE
+import com.drexask.presentation.utils.DEPARTURE_CACHE
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

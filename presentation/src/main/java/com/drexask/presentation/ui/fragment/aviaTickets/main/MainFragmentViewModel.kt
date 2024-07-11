@@ -2,8 +2,11 @@ package com.drexask.presentation.ui.fragment.aviaTickets.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.drexask.domain.model.DirectFlight
 import com.drexask.domain.model.MusicFlight
+import com.drexask.domain.repository.DirectFlightsRepository
 import com.drexask.domain.repository.MusicFlightsRepository
+import com.drexask.domain.usecase.GetDirectFlightsUseCase
 import com.drexask.domain.usecase.GetMusicFlightsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainFragmentViewModel @Inject constructor(
-    private val musicFlightsRepository: MusicFlightsRepository
+    private val musicFlightsRepository: MusicFlightsRepository,
+    private val directFlightRepository: DirectFlightsRepository
 ): ViewModel() {
 
     internal val screenState = MutableStateFlow(ScreenState.DEFAULT)
@@ -25,6 +29,9 @@ class MainFragmentViewModel @Inject constructor(
 
     private val _musicFlights: MutableStateFlow<List<MusicFlight>> = MutableStateFlow(emptyList())
     internal val musicFlights = _musicFlights.asStateFlow()
+
+    private val _directFlights: MutableStateFlow<List<DirectFlight>> = MutableStateFlow(emptyList())
+    internal val directFlights = _directFlights.asStateFlow()
 
     private val _errorToasts = MutableSharedFlow<Error>()
     internal val errorToast = _errorToasts.asSharedFlow()
@@ -40,6 +47,17 @@ class MainFragmentViewModel @Inject constructor(
                 _errorToasts.emit(Error.DOWNLOADING_ERROR)
             }
         }
+        viewModelScope.launch {
+            val result = GetDirectFlightsUseCase(directFlightRepository).execute()
+
+            if(result.isSuccess) {
+                _directFlights.value = result.getOrNull()!!
+            } else {
+                result.exceptionOrNull()?.printStackTrace()
+                _errorToasts.emit(Error.DOWNLOADING_ERROR)
+            }
+        }
+
     }
 
     internal fun clearDestination() {

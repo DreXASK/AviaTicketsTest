@@ -1,11 +1,8 @@
 package com.drexask.presentation.ui.fragment.aviaTickets.main
 
-import android.view.View
-import com.drexask.domain.model.MusicFlight
 import com.drexask.domain.model.PopularDestination
 import com.drexask.presentation.R
 import com.drexask.presentation.databinding.CardPopularDestinationBinding
-import com.drexask.presentation.utils.applyPriceDecorator
 import com.livermor.delegateadapter.delegate.ViewBindingDelegateAdapter
 
 class PopularDestinationsDelegateAdapter(private val clickListener: (String) -> Unit):

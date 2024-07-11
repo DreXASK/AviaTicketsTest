@@ -17,6 +17,12 @@ object NetworkServicesModule {
     @Singleton
     fun provideMusicFlightsService(
         @Named("drive.usercontent.google.com") retrofit: Retrofit
-    ): MusicFlightsService = retrofit.create<MusicFlightsService>()
+    ): MusicFlightsService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideDirectFlightsService(
+        @Named("drive.usercontent.google.com") retrofit: Retrofit
+    ): DirectFlightService = retrofit.create()
 
 }

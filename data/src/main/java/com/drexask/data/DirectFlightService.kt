@@ -1,14 +1,14 @@
 package com.drexask.data
 
-import com.drexask.data.dto.MusicFlightDownloadedData
+import com.drexask.data.dto.DirectFlightDownloadedData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MusicFlightsService {
+interface DirectFlightService {
 
     @GET("u/0/uc")
-    suspend fun getMusicFlights(
+    suspend fun getDirectFlights(
         @Query("id") id: String,
         @Query("export") export: String
-    ): MusicFlightDownloadedData
+    ): DirectFlightDownloadedData
 }

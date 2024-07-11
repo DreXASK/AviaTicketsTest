@@ -1,5 +1,8 @@
 package com.drexask.data
 
+import com.drexask.data.repository.DirectFlightRepositoryImpl
+import com.drexask.data.repository.MusicFlightsRepositoryImpl
+import com.drexask.domain.repository.DirectFlightsRepository
 import com.drexask.domain.repository.MusicFlightsRepository
 import dagger.Module
 import dagger.Provides
@@ -16,5 +19,11 @@ object RepositoryModule {
     fun provideMusicFlightsRepository(
         musicFlightsService: MusicFlightsService
     ): MusicFlightsRepository = MusicFlightsRepositoryImpl(musicFlightsService)
+
+    @Provides
+    @Singleton
+    fun provideDirectFlightsRepository(
+        directFlightService: DirectFlightService
+    ): DirectFlightsRepository = DirectFlightRepositoryImpl(directFlightService)
 
 }

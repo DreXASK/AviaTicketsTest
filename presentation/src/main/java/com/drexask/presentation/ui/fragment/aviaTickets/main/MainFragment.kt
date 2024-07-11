@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drexask.presentation.R
 import com.drexask.presentation.databinding.FragmentAviaTicketsMainBinding
-import com.drexask.presentation.ui.DEPARTURE_CACHE
+import com.drexask.presentation.utils.DEPARTURE_CACHE
 import com.drexask.presentation.utils.SpaceItemDecoration
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,13 +38,12 @@ class MainFragment : Fragment() {
     private val bd: FragmentAviaTicketsMainBinding get() = _binding!!
 
     private val viewModel: MainFragmentViewModel by activityViewModels()
-    private var recyclerAdapter: CompositeDelegateAdapter? = null
+    private var musicFlightAdapter: CompositeDelegateAdapter? = null
+    private var directFlightAdapter: CompositeDelegateAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         restoreCachedValues()
-
     }
 
     override fun onCreateView(
@@ -53,7 +52,7 @@ class MainFragment : Fragment() {
     ): View {
         _binding = FragmentAviaTicketsMainBinding.inflate(layoutInflater)
 
-        setupRecyclerView()
+        setupRecyclers()
         setupObservers()
         setupListeners()
         setupTextViews()
@@ -69,6 +68,28 @@ class MainFragment : Fragment() {
                 departurePlaceText = departureCachedText
             )
         }
+    }
+
+    private fun setupRecyclers() {
+        setupMusicFlightsRecyclerView()
+        setupDirectFlightsRecyclerView()
+    }
+
+    private fun setupMusicFlightsRecyclerView() {
+        musicFlightAdapter = CompositeDelegateAdapter(MusicFlightsDelegateAdapter())
+
+        bd.rvMusicFlights.adapter = musicFlightAdapter
+        bd.rvMusicFlights.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        bd.rvMusicFlights.addItemDecoration(SpaceItemDecoration(100))
+    }
+
+    private fun setupDirectFlightsRecyclerView() {
+        directFlightAdapter = CompositeDelegateAdapter(DirectFlightDelegateAdapter())
+
+        bd.rvDirectFlightsDestinationSelected.adapter = directFlightAdapter
+        bd.rvDirectFlightsDestinationSelected.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
     }
 
     private fun setupObservers() {
@@ -102,11 +123,16 @@ class MainFragment : Fragment() {
                 dateOfFlightObserver()
             }
         }
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                directFlightsObserver()
+            }
+        }
     }
 
     private suspend fun musicFlightsObserver() {
         viewModel.musicFlights.collectLatest {
-            recyclerAdapter?.swapData(it)
+            musicFlightAdapter?.swapData(it)
         }
     }
 
@@ -155,13 +181,10 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView() {
-        recyclerAdapter = CompositeDelegateAdapter(MusicFlightsDelegateAdapter())
-
-        bd.rvMusicFlights.adapter = recyclerAdapter
-        bd.rvMusicFlights.layoutManager =
-            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        bd.rvMusicFlights.addItemDecoration(SpaceItemDecoration(100))
+    private suspend fun directFlightsObserver() {
+        viewModel.directFlights.collectLatest {
+            directFlightAdapter?.swapData(it)
+        }
     }
 
     private fun setupListeners() {

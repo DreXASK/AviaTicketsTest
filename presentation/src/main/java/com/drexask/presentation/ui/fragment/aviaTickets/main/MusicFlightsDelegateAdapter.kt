@@ -21,7 +21,7 @@ class MusicFlightsDelegateAdapter:
         tvTitle.text = item.title
         tvTown.text = item.town
         ivIcon.setImageResource(R.drawable.ic_plane)
-        tvPrice.text = root.context.getString(R.string.price_text, item.price.value.toString().applyPriceDecorator())
+        tvPrice.text = root.context.getString(R.string.price_text_from, item.price.value.toString().applyPriceDecorator())
     }
 
         override fun MusicFlight.getItemId(): Any = id
