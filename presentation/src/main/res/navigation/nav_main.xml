@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_aviaTicketsFragment_to_hotTicketsFragment"
             app:destination="@id/hotTicketsFragment" />
+        <action
+            android:id="@+id/action_aviaTicketsFragment_to_allTicketsFragment"
+            app:destination="@id/allTicketsFragment" />
     </fragment>
     <fragment
         android:id="@+id/hotelsFragment"
@@ -48,9 +51,16 @@
     <fragment
         android:id="@+id/hotTicketsFragment"
         android:name="com.drexask.presentation.ui.fragment.aviaTickets.placeholders.HotTicketsFragment"
-        android:label="HotTicketsFragment" />
+        android:label="HotTicketsFragment"
+        tools:layout="@layout/fragment_hot_tickets"/>
     <fragment
         android:id="@+id/weekendFragment"
         android:name="com.drexask.presentation.ui.fragment.aviaTickets.placeholders.WeekendFragment"
-        android:label="WeekendFragment" />
+        android:label="WeekendFragment"
+        tools:layout="@layout/fragment_weekend"/>
+    <fragment
+        android:id="@+id/allTicketsFragment"
+        android:name="com.drexask.presentation.ui.fragment.aviaTickets.allTickets.AllTicketsFragment"
+        android:label="fragment_avia_tickets_all_tickets"
+        tools:layout="@layout/fragment_avia_tickets_all_tickets" />
 </navigation>

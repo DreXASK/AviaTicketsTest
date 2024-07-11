@@ -1,6 +1,6 @@
 package com.drexask.data.repository
 
-import com.drexask.data.DirectFlightService
+import com.drexask.data.services.DirectFlightService
 import com.drexask.domain.model.DirectFlight
 import com.drexask.domain.repository.DirectFlightsRepository
 import javax.inject.Inject

@@ -15,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import com.drexask.presentation.R
 import com.drexask.presentation.databinding.FragmentAviaTicketsMainBinding
 import com.drexask.presentation.utils.DEPARTURE_CACHE
 import com.drexask.presentation.utils.SpaceItemDecoration
+import com.drexask.presentation.utils.ToastErrorType
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -109,7 +111,7 @@ class MainFragment : Fragment() {
         }
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                toastObserver()
+                toastErrorObserver()
             }
         }
         lifecycleScope.launch {
@@ -136,10 +138,10 @@ class MainFragment : Fragment() {
         }
     }
 
-    private suspend fun toastObserver() {
+    private suspend fun toastErrorObserver() {
         viewModel.errorToast.collectLatest { errorType ->
             val errorMessage = when (errorType) {
-                MainFragmentViewModel.Error.DOWNLOADING_ERROR -> getString(R.string.downloading_error)
+                ToastErrorType.DOWNLOADING_ERROR -> getString(R.string.downloading_error)
             }
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
         }
@@ -196,6 +198,7 @@ class MainFragment : Fragment() {
         clickGoBack()
         clickSelectBackFlightDate()
         clickSelectFlightDate()
+        clickViewAllTickets()
     }
 
     private fun clickOnDestination() {
@@ -233,7 +236,11 @@ class MainFragment : Fragment() {
             context?.let { context ->
                 val datePickerDialog = DatePickerDialog(context)
                 datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
-                    Toast.makeText(context, "Выбран обратный билет. Дата - ${dayOfMonth}.${month}.${year}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        "Выбран обратный билет. Дата - ${dayOfMonth}.${month}.${year}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 datePickerDialog.show()
             }
@@ -246,10 +253,20 @@ class MainFragment : Fragment() {
             context?.let { context ->
                 val datePickerDialog = DatePickerDialog(context)
                 datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
-                    viewModel.dateOfFlightState.value = LocalDate.of(year, month+1, dayOfMonth) // month is starting from 0 in datePickerDialog
+                    viewModel.dateOfFlightState.value = LocalDate.of(
+                        year,
+                        month + 1,
+                        dayOfMonth
+                    ) // month is starting from 0 in datePickerDialog
                 }
                 datePickerDialog.show()
             }
+        }
+    }
+
+    private fun clickViewAllTickets() {
+        bd.btnAllTicketsDestinationSelected.setOnClickListener {
+            findNavController().navigate(R.id.allTicketsFragment)
         }
     }
 

@@ -1,5 +1,8 @@
 package com.drexask.data
 
+import com.drexask.data.services.DirectFlightService
+import com.drexask.data.services.MusicFlightsService
+import com.drexask.data.services.TicketsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,5 +27,11 @@ object NetworkServicesModule {
     fun provideDirectFlightsService(
         @Named("drive.usercontent.google.com") retrofit: Retrofit
     ): DirectFlightService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideTicketsService(
+        @Named("drive.google.com") retrofit: Retrofit
+    ): TicketsService = retrofit.create()
 
 }

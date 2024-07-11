@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="7dp"
+        app:cardBackgroundColor="@color/grey_1"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_ticket_price"
+                style="@style/text_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="8 566 ₽" />
+
+            <ImageView
+                android:id="@+id/iv_circle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_airport_departure"
+                app:layout_constraintStart_toStartOf="@+id/tv_ticket_price"
+                app:layout_constraintTop_toTopOf="@+id/tv_time_departure"
+                app:srcCompat="@drawable/shape_circle"
+                app:tint="@color/red" />
+
+            <TextView
+                android:id="@+id/tv_time_departure"
+                style="@style/text_title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/tv_airport_departure"
+                app:layout_constraintStart_toStartOf="@+id/tv_airport_departure"
+                tools:text="17:45" />
+
+            <TextView
+                android:id="@+id/tv_airport_departure"
+                style="@style/text_title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/grey_6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_circle"
+                tools:text="DME" />
+
+            <ImageView
+                android:id="@+id/iv_dash"
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="3dp"
+                android:tint="@color/grey_6"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_time_departure"
+                app:layout_constraintStart_toEndOf="@+id/tv_time_departure"
+                app:layout_constraintTop_toTopOf="@+id/tv_time_departure"
+                app:srcCompat="@drawable/shape_rectangle" />
+
+            <TextView
+                android:id="@+id/tv_time_destination"
+                style="@style/text_title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/iv_dash"
+                app:layout_constraintTop_toTopOf="@+id/tv_time_departure"
+                tools:text="21:20" />
+
+            <TextView
+                android:id="@+id/tv_airport_destination"
+                style="@style/text_title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_6"
+                app:layout_constraintStart_toStartOf="@+id/tv_time_destination"
+                app:layout_constraintTop_toBottomOf="@+id/tv_time_destination"
+                tools:text="AER" />
+
+            <TextView
+                android:id="@+id/tv_travel_time_and_info"
+                style="@style/text_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="3.5ч в пути / Без пересадок"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_time_destination"
+                app:layout_constraintStart_toEndOf="@+id/tv_time_destination"
+                app:layout_constraintTop_toTopOf="@+id/tv_time_destination" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/special_blue"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="@+id/card_ticket"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_badge"
+            style="@style/text_title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/white"
+            tools:text="Самый удобный" />
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

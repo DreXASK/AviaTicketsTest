@@ -8,6 +8,7 @@ import com.drexask.domain.repository.DirectFlightsRepository
 import com.drexask.domain.repository.MusicFlightsRepository
 import com.drexask.domain.usecase.GetDirectFlightsUseCase
 import com.drexask.domain.usecase.GetMusicFlightsUseCase
+import com.drexask.presentation.utils.ToastErrorType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +34,7 @@ class MainFragmentViewModel @Inject constructor(
     private val _directFlights: MutableStateFlow<List<DirectFlight>> = MutableStateFlow(emptyList())
     internal val directFlights = _directFlights.asStateFlow()
 
-    private val _errorToasts = MutableSharedFlow<Error>()
+    private val _errorToasts = MutableSharedFlow<ToastErrorType>()
     internal val errorToast = _errorToasts.asSharedFlow()
 
     init {
@@ -44,20 +45,19 @@ class MainFragmentViewModel @Inject constructor(
                 _musicFlights.value = result.getOrNull()!!
             } else {
                 result.exceptionOrNull()?.printStackTrace()
-                _errorToasts.emit(Error.DOWNLOADING_ERROR)
+                _errorToasts.emit(ToastErrorType.DOWNLOADING_ERROR)
             }
         }
         viewModelScope.launch {
             val result = GetDirectFlightsUseCase(directFlightRepository).execute()
 
             if(result.isSuccess) {
-                _directFlights.value = result.getOrNull()!!
+                _directFlights.value = result.getOrNull()!!.take(3)
             } else {
                 result.exceptionOrNull()?.printStackTrace()
-                _errorToasts.emit(Error.DOWNLOADING_ERROR)
+                _errorToasts.emit(ToastErrorType.DOWNLOADING_ERROR)
             }
         }
-
     }
 
     internal fun clearDestination() {
@@ -65,10 +65,6 @@ class MainFragmentViewModel @Inject constructor(
             destinationPlaceText = ""
         )
         screenState.value = ScreenState.DEFAULT
-    }
-
-    internal enum class Error {
-        DOWNLOADING_ERROR
     }
 
     internal enum class ScreenState {

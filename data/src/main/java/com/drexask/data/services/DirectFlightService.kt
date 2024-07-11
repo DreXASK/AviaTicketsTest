@@ -1,4 +1,4 @@
-package com.drexask.data
+package com.drexask.data.services
 
 import com.drexask.data.dto.DirectFlightDownloadedData
 import retrofit2.http.GET

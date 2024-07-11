@@ -2,8 +2,13 @@ package com.drexask.data
 
 import com.drexask.data.repository.DirectFlightRepositoryImpl
 import com.drexask.data.repository.MusicFlightsRepositoryImpl
+import com.drexask.data.repository.TicketsRepositoryImpl
+import com.drexask.data.services.DirectFlightService
+import com.drexask.data.services.MusicFlightsService
+import com.drexask.data.services.TicketsService
 import com.drexask.domain.repository.DirectFlightsRepository
 import com.drexask.domain.repository.MusicFlightsRepository
+import com.drexask.domain.repository.TicketsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,4 +31,9 @@ object RepositoryModule {
         directFlightService: DirectFlightService
     ): DirectFlightsRepository = DirectFlightRepositoryImpl(directFlightService)
 
+    @Provides
+    @Singleton
+    fun provideTicketsRepository(
+        ticketsService: TicketsService
+    ): TicketsRepository = TicketsRepositoryImpl(ticketsService)
 }

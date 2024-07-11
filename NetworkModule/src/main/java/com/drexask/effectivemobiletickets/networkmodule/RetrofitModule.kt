@@ -66,7 +66,7 @@ object RetrofitModule {
         contentType: MediaType
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("drive.google.com")
+            .baseUrl("https://drive.google.com")
             .client(httpClient)
             .addConverterFactory(json.asConverterFactory(contentType))
             .build()
