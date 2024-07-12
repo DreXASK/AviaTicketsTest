@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.drexask.effectivemobiletickets.networkmodule"
+    namespace = "com.drexask.aviaticketstest.networkmodule"
     compileSdk = 34
 
     defaultConfig {
@@ -45,7 +45,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     api(libs.retrofit)
-    api(libs.retrofit.kotlinx.converter)
+    implementation(libs.retrofit.kotlinx.converter)
+    implementation(libs.retrofit.logging.interceptor)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)

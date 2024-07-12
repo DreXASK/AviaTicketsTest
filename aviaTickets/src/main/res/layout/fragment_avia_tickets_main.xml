@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_header"
@@ -157,7 +157,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_fields_destination_selected"
@@ -309,7 +309,7 @@
         </HorizontalScrollView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_direct_flights_destination_selected"
+            android:id="@+id/cardview_ticket_offers_destination_selected"
             style="@style/Base.Widget.Material3.CardView.Custom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -333,15 +333,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:text="@string/direct_flights"
+                    android:text="@string/ticket_offers"
                     android:textColor="@color/white" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_direct_flights_destination_selected"
+                    android:id="@+id/rv_ticket_offers_destination_selected"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="3"
-                    tools:listitem="@layout/card_direct_flight" />
+                    tools:listitem="@layout/card_ticket_offer" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:minHeight="0dp"
+                    android:text="@string/show_all"
+                    android:textAppearance="@style/text_title3"
+                    android:textColor="@color/special_blue"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -361,7 +371,7 @@
             app:backgroundTint="@color/special_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_direct_flights_destination_selected" />
+            app:layout_constraintTop_toBottomOf="@+id/cardview_ticket_offers_destination_selected" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class TicketsRepositoryImpl @Inject constructor(
     private val ticketsService: TicketsService
-): TicketsRepository {
+) : TicketsRepository {
 
     override suspend fun getTickets(): Result<List<Ticket>> {
         try {

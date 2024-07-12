@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.drexask.effectivemobiletickets"
+    namespace = "com.drexask.aviaticketstest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.drexask.effectivemobiletickets"
+        applicationId = "com.drexask.aviaticketstest"
         minSdk = 27
         targetSdk = 34
         versionCode = 1

@@ -2,11 +2,9 @@ package com.drexask.aviatickets.presentation.ui.fragment.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.drexask.aviatickets.domain.repository.DirectFlightsRepository
-import com.drexask.aviatickets.domain.repository.MusicFlightsRepository
-import com.drexask.aviatickets.domain.usecase.GetDirectFlightsUseCase
+import com.drexask.aviatickets.domain.usecase.GetTicketOffersUseCase
 import com.drexask.aviatickets.domain.usecase.GetMusicFlightsUseCase
-import com.drexask.aviatickets.presentation.models.DirectFlightUi
+import com.drexask.aviatickets.presentation.models.TicketOfferUi
 import com.drexask.aviatickets.presentation.models.MusicFlightUi
 import com.drexask.aviatickets.presentation.models.bundleModels.SearchPlacesData
 import com.drexask.aviatickets.presentation.utils.ToastErrorType
@@ -21,8 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainFragmentViewModel @Inject constructor(
-    private val musicFlightsRepository: MusicFlightsRepository,
-    private val directFlightRepository: DirectFlightsRepository
+    private val getMusicFlightsUseCase: GetMusicFlightsUseCase,
+    private val getTicketOffersUseCase: GetTicketOffersUseCase
 ): ViewModel() {
 
     internal val screenState = MutableStateFlow(ScreenState.DEFAULT)
@@ -32,35 +30,35 @@ class MainFragmentViewModel @Inject constructor(
     private val _musicFlights: MutableStateFlow<List<MusicFlightUi>> = MutableStateFlow(emptyList())
     internal val musicFlights = _musicFlights.asStateFlow()
 
-    private val _directFlights: MutableStateFlow<List<DirectFlightUi>> = MutableStateFlow(emptyList())
-    internal val directFlights = _directFlights.asStateFlow()
+    private val _ticketOffers: MutableStateFlow<List<TicketOfferUi>> = MutableStateFlow(emptyList())
+    internal val ticketOffers = _ticketOffers.asStateFlow()
 
     private val _errorToasts = MutableSharedFlow<ToastErrorType>()
     internal val errorToast = _errorToasts.asSharedFlow()
 
     init {
         viewModelScope.launch {
-            val result = GetMusicFlightsUseCase(musicFlightsRepository).execute()
+            val result = getMusicFlightsUseCase.execute()
 
             if(result.isSuccess) {
-                val musicFlights = result.getOrThrow().map {
+                val musicFlightsReceived = result.getOrThrow().map {
                     MusicFlightUi.mapFromDomainModel(it)
                 }
 
-                _musicFlights.value = musicFlights
+                _musicFlights.value = musicFlightsReceived
             } else {
                 result.exceptionOrNull()?.printStackTrace()
                 _errorToasts.emit(ToastErrorType.DOWNLOADING_ERROR)
             }
         }
         viewModelScope.launch {
-            val result = GetDirectFlightsUseCase(directFlightRepository).execute()
+            val result = getTicketOffersUseCase.execute()
 
             if(result.isSuccess) {
-                val directFlights = result.getOrThrow().map {
-                    DirectFlightUi.mapFromDomainModel(it)
+                val ticketOffersReceived = result.getOrThrow().take(3).map {
+                    TicketOfferUi.mapFromDomainModel(it)
                 }
-                _directFlights.value = directFlights
+                _ticketOffers.value = ticketOffersReceived
             } else {
                 result.exceptionOrNull()?.printStackTrace()
                 _errorToasts.emit(ToastErrorType.DOWNLOADING_ERROR)

@@ -7,27 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.drexask.aviatickets.databinding.FragmentWeekendBinding
+import com.drexask.aviatickets.presentation.utils.extensions.ViewBindingFragment
 
-class WeekendFragment : Fragment() {
+class WeekendFragment :
+    ViewBindingFragment<FragmentWeekendBinding>(FragmentWeekendBinding::inflate) {
 
-    private var _binding: FragmentWeekendBinding? = null
-    private val bd: FragmentWeekendBinding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentWeekendBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         bd.button.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        return bd.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

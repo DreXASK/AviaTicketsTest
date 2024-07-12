@@ -1,11 +1,8 @@
 package com.drexask.aviatickets.presentation.ui.fragment.allTickets
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drexask.aviatickets.R
 import com.drexask.aviatickets.databinding.FragmentAviaTicketsAllTicketsBinding
+import com.drexask.aviatickets.presentation.utils.extensions.ViewBindingFragment
 import com.drexask.aviatickets.presentation.models.bundleModels.SearchPlacesData
 import com.drexask.aviatickets.presentation.utils.BUNDLE_DEPARTURE_DATE
 import com.drexask.aviatickets.presentation.utils.BUNDLE_PASSENGER_COUNT
@@ -32,27 +30,20 @@ import java.util.Locale
 
 
 @AndroidEntryPoint
-class AllTicketsFragment : Fragment() {
-
-    private var _binding: FragmentAviaTicketsAllTicketsBinding? = null
-    private val bd: FragmentAviaTicketsAllTicketsBinding get() = _binding!!
+class AllTicketsFragment :
+    ViewBindingFragment<FragmentAviaTicketsAllTicketsBinding>(FragmentAviaTicketsAllTicketsBinding::inflate) {
 
     private val viewModel: AllTicketsFragmentViewModel by viewModels()
 
     private var ticketsAdapter: CompositeDelegateAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAviaTicketsAllTicketsBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupBundleValues()
         setupListeners()
         setupObservers()
         setupRecycler()
-
-        return bd.root
     }
 
     private fun setupBundleValues() {

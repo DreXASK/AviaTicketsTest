@@ -11,22 +11,22 @@
     </navigation>
     <fragment
         android:id="@+id/hotelsFragment"
-        android:name="com.drexask.hotels.HotelsFragment"
+        android:name="com.drexask.hotels.presentation.HotelsFragment"
         android:label="fragment_hotels"
         tools:layout="@layout/fragment_hotels" />
     <fragment
         android:id="@+id/korocheFragment"
-        android:name="com.drexask.koroche.KorocheFragment"
+        android:name="com.drexask.koroche.presentation.KorocheFragment"
         android:label="fragment_koroche"
         tools:layout="@layout/fragment_koroche" />
     <fragment
         android:id="@+id/subscriptionsFragment"
-        android:name="com.drexask.subscriptions.SubscriptionsFragment"
+        android:name="com.drexask.subscriptions.presentation.SubscriptionsFragment"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.drexask.userprofile.UserProfileFragment"
+        android:name="com.drexask.userprofile.presentation.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
 

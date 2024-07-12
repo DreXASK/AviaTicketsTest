@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class MusicFlightsRepositoryImpl @Inject constructor(
     private val musicFlightsService: MusicFlightsService
-): MusicFlightsRepository {
+) : MusicFlightsRepository {
 
     override suspend fun getMusicFlights(): Result<List<MusicFlight>> {
         try {

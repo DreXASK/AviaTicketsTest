@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Effective Mobile Tickets"
+rootProject.name = "Avia Tickets Test"
 include(":app")
 include(":networkModule")
 include(":aviaTickets")

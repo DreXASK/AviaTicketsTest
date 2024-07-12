@@ -1,33 +1,20 @@
 package com.drexask.aviatickets.presentation.ui.fragment.hotTickets
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.drexask.aviatickets.databinding.FragmentHotTicketsBinding
+import com.drexask.aviatickets.presentation.utils.extensions.ViewBindingFragment
 
-class HotTicketsFragment : Fragment() {
+class HotTicketsFragment :
+    ViewBindingFragment<FragmentHotTicketsBinding>(FragmentHotTicketsBinding::inflate) {
 
-    private var _binding: FragmentHotTicketsBinding? = null
-    private val bd: FragmentHotTicketsBinding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHotTicketsBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         bd.button.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        return bd.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

@@ -22,9 +22,9 @@ import com.drexask.aviatickets.presentation.models.PopularDestinationUi
 import com.drexask.aviatickets.presentation.models.bundleModels.SearchPlacesData
 import com.drexask.aviatickets.presentation.ui.fragment.main.adapters.PopularDestinationsDelegateAdapter
 import com.drexask.aviatickets.presentation.utils.DEPARTURE_CACHE
+import com.drexask.aviatickets.presentation.utils.extensions.ViewBindingBottomSheetDialogFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -32,28 +32,20 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DestinationBottomSheetFragment(@LayoutRes layoutRes: Int) :
-    BottomSheetDialogFragment(layoutRes) {
-
-    private var _binding: FragmentAviaTicketsDestinationBottomSheetBinding? = null
-    private val bd get() = _binding!!
+    ViewBindingBottomSheetDialogFragment<FragmentAviaTicketsDestinationBottomSheetBinding>(
+        FragmentAviaTicketsDestinationBottomSheetBinding::bind,
+        layoutRes
+    ) {
 
     private val viewModel: MainFragmentViewModel by activityViewModels()
-    private var adapter: CompositeDelegateAdapter? = null
+    private var popularDestinationsAdapter: CompositeDelegateAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-
-        _binding = view?.let { FragmentAviaTicketsDestinationBottomSheetBinding.bind(it) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
         setupListeners()
         setupObservers()
-
-        return view
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -109,19 +101,19 @@ class DestinationBottomSheetFragment(@LayoutRes layoutRes: Int) :
     }
 
     private fun tryChangeMainFragmentStateToSelected() {
-        if(bd.etDeparture.text.isNotBlank() && bd.etDestination.text.isNotBlank()) {
+        if (bd.etDeparture.text.isNotBlank() && bd.etDestination.text.isNotBlank()) {
             viewModel.screenState.value = MainFragmentViewModel.ScreenState.DESTINATION_SELECTED
         }
     }
 
     private fun setupRecyclerView() {
-        adapter = CompositeDelegateAdapter(
+        popularDestinationsAdapter = CompositeDelegateAdapter(
             PopularDestinationsDelegateAdapter {
                 bd.etDestination.setText(it)
             }
         )
 
-        bd.rvPopularDestinations.adapter = adapter
+        bd.rvPopularDestinations.adapter = popularDestinationsAdapter
         bd.rvPopularDestinations.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
@@ -143,7 +135,7 @@ class DestinationBottomSheetFragment(@LayoutRes layoutRes: Int) :
             )
         )
 
-        adapter?.swapData(popularDestinationData)
+        popularDestinationsAdapter?.swapData(popularDestinationData)
     }
 
     private fun setupObservers() {
@@ -205,10 +197,5 @@ class DestinationBottomSheetFragment(@LayoutRes layoutRes: Int) :
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
 

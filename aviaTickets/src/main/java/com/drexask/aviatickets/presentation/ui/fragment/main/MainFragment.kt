@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drexask.aviatickets.R
 import com.drexask.aviatickets.databinding.FragmentAviaTicketsMainBinding
 import com.drexask.aviatickets.presentation.models.bundleModels.SearchPlacesData
-import com.drexask.aviatickets.presentation.ui.fragment.main.adapters.DirectFlightDelegateAdapter
+import com.drexask.aviatickets.presentation.ui.fragment.main.adapters.TicketOfferAdapter
 import com.drexask.aviatickets.presentation.ui.fragment.main.adapters.MusicFlightsDelegateAdapter
 import com.drexask.aviatickets.presentation.utils.BUNDLE_DEPARTURE_DATE
 import com.drexask.aviatickets.presentation.utils.BUNDLE_PASSENGER_COUNT
@@ -31,6 +28,7 @@ import com.drexask.aviatickets.presentation.utils.BUNDLE_SEARCH_PLACES_DATA
 import com.drexask.aviatickets.presentation.utils.DEPARTURE_CACHE
 import com.drexask.aviatickets.presentation.utils.SpaceItemDecoration
 import com.drexask.aviatickets.presentation.utils.ToastErrorType
+import com.drexask.aviatickets.presentation.utils.extensions.ViewBindingFragment
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -41,33 +39,26 @@ import java.util.Locale
 
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
-
-    private var _binding: FragmentAviaTicketsMainBinding? = null
-    private val bd: FragmentAviaTicketsMainBinding get() = _binding!!
+class MainFragment :
+    ViewBindingFragment<FragmentAviaTicketsMainBinding>(FragmentAviaTicketsMainBinding::inflate) {
 
     private val viewModel: MainFragmentViewModel by activityViewModels()
     private var musicFlightAdapter: CompositeDelegateAdapter? = null
-    private var directFlightAdapter: CompositeDelegateAdapter? = null
+    private var ticketOfferAdapter: CompositeDelegateAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         restoreCachedValues()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAviaTicketsMainBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupRecyclers()
         setupObservers()
         setupListeners()
         setupTextViews()
         changeBackButtonBehavior()
-
-        return bd.root
     }
 
     private fun restoreCachedValues() {
@@ -82,7 +73,7 @@ class MainFragment : Fragment() {
 
     private fun setupRecyclers() {
         setupMusicFlightsRecyclerView()
-        setupDirectFlightsRecyclerView()
+        setupTicketOffersRecyclerView()
     }
 
     private fun setupMusicFlightsRecyclerView() {
@@ -94,11 +85,11 @@ class MainFragment : Fragment() {
         bd.rvMusicFlights.addItemDecoration(SpaceItemDecoration(100))
     }
 
-    private fun setupDirectFlightsRecyclerView() {
-        directFlightAdapter = CompositeDelegateAdapter(DirectFlightDelegateAdapter())
+    private fun setupTicketOffersRecyclerView() {
+        ticketOfferAdapter = CompositeDelegateAdapter(TicketOfferAdapter())
 
-        bd.rvDirectFlightsDestinationSelected.adapter = directFlightAdapter
-        bd.rvDirectFlightsDestinationSelected.layoutManager =
+        bd.rvTicketOffersDestinationSelected.adapter = ticketOfferAdapter
+        bd.rvTicketOffersDestinationSelected.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
     }
 
@@ -136,7 +127,7 @@ class MainFragment : Fragment() {
         }
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                directFlightsObserver()
+                ticketOffersObserver()
             }
         }
     }
@@ -204,9 +195,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    private suspend fun directFlightsObserver() {
-        viewModel.directFlights.collectLatest {
-            directFlightAdapter?.swapData(it)
+    private suspend fun ticketOffersObserver() {
+        viewModel.ticketOffers.collectLatest {
+            ticketOfferAdapter?.swapData(it)
         }
     }
 
@@ -326,7 +317,12 @@ class MainFragment : Fragment() {
         val indexOfComma = spannableString.indexOf(",")
         context?.let { context ->
             spannableString.setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(context, com.drexask.core.R.color.grey_6)),
+                ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        context,
+                        com.drexask.core.R.color.grey_6
+                    )
+                ),
                 indexOfComma,
                 spannableString.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -347,10 +343,5 @@ class MainFragment : Fragment() {
             R.layout.fragment_avia_tickets_destination_bottom_sheet
         )
         dialog.show(childFragmentManager, null)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

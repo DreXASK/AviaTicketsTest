@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AllTicketsFragmentViewModel @Inject constructor(
-    private val ticketsRepository: TicketsRepository
+    private val getTicketsUseCase: GetTicketsUseCase
 ): ViewModel() {
 
     private val _tickets: MutableStateFlow<List<TicketUi>> = MutableStateFlow(emptyList())
@@ -27,7 +27,7 @@ class AllTicketsFragmentViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = GetTicketsUseCase(ticketsRepository).execute()
+            val result = getTicketsUseCase.execute()
 
             if(result.isSuccess) {
                 val tickets = result.getOrThrow().map {
