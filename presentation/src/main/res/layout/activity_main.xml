@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="10dp"
-    tools:context="com.drexask.presentation.ui.activity.MainActivity">
+    tools:context="com.drexask.effectivemobiletickets.presentation.MainActivity">
 
     <View
         android:id="@+id/bottom_divider"

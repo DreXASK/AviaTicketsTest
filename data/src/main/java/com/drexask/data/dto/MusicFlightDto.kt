@@ -1,6 +1,6 @@
 package com.drexask.data.dto
 
-import com.drexask.domain.model.MusicFlight
+import com.drexask.domain.models.MusicFlight
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

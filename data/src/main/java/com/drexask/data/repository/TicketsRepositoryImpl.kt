@@ -1,7 +1,7 @@
 package com.drexask.data.repository
 
 import com.drexask.data.services.TicketsService
-import com.drexask.domain.model.Ticket
+import com.drexask.domain.models.Ticket
 import com.drexask.domain.repository.TicketsRepository
 import javax.inject.Inject
 

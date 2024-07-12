@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.drexask.presentation.ui.activity.MainActivity"
+            android:name="com.drexask.effectivemobiletickets.presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

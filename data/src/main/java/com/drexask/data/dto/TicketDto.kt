@@ -1,9 +1,9 @@
 package com.drexask.data.dto
 
 import com.drexask.data.utils.LocalDateTimeSerializer
-import com.drexask.domain.model.Arrival
-import com.drexask.domain.model.Departure
-import com.drexask.domain.model.Ticket
+import com.drexask.domain.models.Arrival
+import com.drexask.domain.models.Departure
+import com.drexask.domain.models.Ticket
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
@@ -53,7 +53,7 @@ data class DepartureDto(
     fun mapToDomainModel(): Departure {
         return Departure(
             town = this.town,
-            dateTime = this.dateTime,
+            localDateTime = this.dateTime.toString(),
             airport = this.airport
         )
     }
@@ -71,7 +71,7 @@ data class ArrivalDto(
     fun mapToDomainModel(): Arrival {
         return Arrival(
             town = this.town,
-            dateTime = this.date,
+            localDateTime = this.date.toString(),
             airport = this.airport
         )
     }

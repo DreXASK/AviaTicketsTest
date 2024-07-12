@@ -1,6 +1,6 @@
 package com.drexask.data.dto
 
-import com.drexask.domain.model.Price
+import com.drexask.domain.models.Price
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

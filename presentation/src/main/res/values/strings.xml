@@ -11,14 +11,30 @@
     <string name="user_profile">Профиль</string>
 
     <!-- AviaTicketsMainFragment -->
+    <string name="header">Поиск дешевых\nавиабилетов</string>
     <string name="downloading_error">Ошибка загрузки данных</string>
     <string name="price_text">%1$s ₽</string>
     <string name="price_text_from">от %1$s ₽</string>
+    <string name="passengers_info">1, эконом</string>
+    <string name="filters">фильтры</string>
+    <string name="direct_flights">Прямые рейсы</string>
+    <string name="view_all_tickets">Посмотреть все билеты</string>
+    <string name="price_subscription">Подписка на цену</string>
 
     <!-- AviaTicketsSearchBottomSheetFragment -->
     <string name="complex_route">Сложный\nмаршрут</string>
     <string name="to_anywhere">Куда угодно</string>
     <string name="weekend">Выходные</string>
     <string name="hot_tickets">Горячие\nбилеты</string>
+    <string name="departure_hint">Откуда - Москва</string>
+    <string name="destination_hint">Куда - Турция</string>
+
+    <!-- AviaTicketsAllTicketsFragment -->
+    <string name="filter">Фильтр</string>
+    <string name="price_graph">График цен</string>
+    <string name="departure_and_destination">%1$s-%2$s</string>
+    <string name="data_for_search">%1$d %2$s, %3$d пассажир</string>
+    <string name="flight_duration">%1$sч в пути</string>
+    <string name="without_transfer">" / Без пересадок"</string>
 
 </resources>

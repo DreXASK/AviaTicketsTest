@@ -1,7 +1,7 @@
 package com.drexask.data.repository
 
 import com.drexask.data.services.MusicFlightsService
-import com.drexask.domain.model.MusicFlight
+import com.drexask.domain.models.MusicFlight
 import com.drexask.domain.repository.MusicFlightsRepository
 import javax.inject.Inject
 
