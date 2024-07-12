@@ -1,9 +1,9 @@
 package com.drexask.aviatickets.data.dto
 
-import com.drexask.data.utils.LocalDateTimeSerializer
-import com.drexask.domain.models.Arrival
-import com.drexask.domain.models.Departure
-import com.drexask.domain.models.Ticket
+import com.drexask.aviatickets.data.utils.LocalDateTimeSerializer
+import com.drexask.aviatickets.domain.models.Arrival
+import com.drexask.aviatickets.domain.models.Departure
+import com.drexask.aviatickets.domain.models.Ticket
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime

@@ -1,7 +1,6 @@
-package com.drexask.presentation.models
+package com.drexask.aviatickets.presentation.models
 
-import com.drexask.domain.models.DirectFlight
-import com.drexask.domain.models.PopularDestination
+import com.drexask.aviatickets.domain.models.PopularDestination
 
 data class PopularDestinationUi(
     val id: Int,

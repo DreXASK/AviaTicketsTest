@@ -1,14 +1,14 @@
 package com.drexask.aviatickets.data
 
-import com.drexask.data.repository.DirectFlightRepositoryImpl
-import com.drexask.data.repository.MusicFlightsRepositoryImpl
-import com.drexask.data.repository.TicketsRepositoryImpl
-import com.drexask.data.services.DirectFlightService
-import com.drexask.data.services.MusicFlightsService
-import com.drexask.data.services.TicketsService
-import com.drexask.domain.repository.DirectFlightsRepository
-import com.drexask.domain.repository.MusicFlightsRepository
-import com.drexask.domain.repository.TicketsRepository
+import com.drexask.aviatickets.data.repository.DirectFlightRepositoryImpl
+import com.drexask.aviatickets.data.repository.MusicFlightsRepositoryImpl
+import com.drexask.aviatickets.data.repository.TicketsRepositoryImpl
+import com.drexask.aviatickets.data.services.DirectFlightService
+import com.drexask.aviatickets.data.services.MusicFlightsService
+import com.drexask.aviatickets.data.services.TicketsService
+import com.drexask.aviatickets.domain.repository.DirectFlightsRepository
+import com.drexask.aviatickets.domain.repository.MusicFlightsRepository
+import com.drexask.aviatickets.domain.repository.TicketsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

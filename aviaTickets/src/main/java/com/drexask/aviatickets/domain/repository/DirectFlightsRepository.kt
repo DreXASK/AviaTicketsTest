@@ -1,6 +1,6 @@
-package com.drexask.domain.repository
+package com.drexask.aviatickets.domain.repository
 
-import com.drexask.domain.models.DirectFlight
+import com.drexask.aviatickets.domain.models.DirectFlight
 
 interface DirectFlightsRepository {
 

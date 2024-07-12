@@ -1,6 +1,6 @@
 package com.drexask.aviatickets.data.dto
 
-import com.drexask.domain.models.MusicFlight
+import com.drexask.aviatickets.domain.models.MusicFlight
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

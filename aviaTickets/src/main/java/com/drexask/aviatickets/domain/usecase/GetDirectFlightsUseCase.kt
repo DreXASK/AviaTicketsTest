@@ -1,7 +1,7 @@
-package com.drexask.domain.usecase
+package com.drexask.aviatickets.domain.usecase
 
-import com.drexask.domain.models.DirectFlight
-import com.drexask.domain.repository.DirectFlightsRepository
+import com.drexask.aviatickets.domain.models.DirectFlight
+import com.drexask.aviatickets.domain.repository.DirectFlightsRepository
 
 
 class GetDirectFlightsUseCase(private val repository: DirectFlightsRepository) {

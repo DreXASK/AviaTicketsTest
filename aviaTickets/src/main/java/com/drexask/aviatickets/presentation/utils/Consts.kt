@@ -1,4 +1,4 @@
-package com.drexask.presentation.utils
+package com.drexask.aviatickets.presentation.utils
 
 internal const val DEPARTURE_CACHE = "DEPARTURE_CACHE"
 

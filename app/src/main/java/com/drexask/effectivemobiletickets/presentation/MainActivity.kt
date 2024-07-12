@@ -2,10 +2,14 @@ package com.drexask.effectivemobiletickets.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.drexask.presentation.databinding.ActivityMainBinding
+import com.drexask.effectivemobiletickets.R
+import com.drexask.effectivemobiletickets.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -20,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(bd.root)
         bd.bottomNavigationView.setupWithNavController(bd.fragmentContainerView.getFragment<NavHostFragment>().navController)
-
 
 //        enableEdgeToEdge()
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

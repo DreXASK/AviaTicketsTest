@@ -1,4 +1,4 @@
-package com.drexask.domain.models
+package com.drexask.aviatickets.domain.models
 
 data class MusicFlight(
     val id: Int,

@@ -1,6 +1,6 @@
 package com.drexask.aviatickets.data.dto
 
-import com.drexask.domain.models.DirectFlight
+import com.drexask.aviatickets.domain.models.DirectFlight
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

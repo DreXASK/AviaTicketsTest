@@ -1,8 +1,8 @@
-package com.drexask.presentation.models
+package com.drexask.aviatickets.presentation.models
 
-import com.drexask.domain.models.Arrival
-import com.drexask.domain.models.Departure
-import com.drexask.domain.models.Ticket
+import com.drexask.aviatickets.domain.models.Arrival
+import com.drexask.aviatickets.domain.models.Departure
+import com.drexask.aviatickets.domain.models.Ticket
 import java.time.LocalDateTime
 
 data class TicketUi(

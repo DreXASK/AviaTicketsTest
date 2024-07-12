@@ -1,4 +1,4 @@
-package com.drexask.presentation.utils
+package com.drexask.aviatickets.presentation.utils
 
 internal enum class ToastErrorType {
     DOWNLOADING_ERROR

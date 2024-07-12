@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_avia_tickets"
+    app:startDestination="@id/aviaTicketsFragment">
+
+    <fragment
+        android:id="@+id/aviaTicketsFragment"
+        android:name="com.drexask.aviatickets.presentation.ui.fragment.main.MainFragment"
+        android:label="fragment_main_module"
+        tools:layout="@layout/fragment_avia_tickets_main" >
+        <action
+            android:id="@+id/action_aviaTicketsFragment_to_complexRouteFragment"
+            app:destination="@id/complexRouteFragment" />
+        <action
+            android:id="@+id/action_aviaTicketsFragment_to_weekendFragment"
+            app:destination="@id/weekendFragment" />
+        <action
+            android:id="@+id/action_aviaTicketsFragment_to_hotTicketsFragment"
+            app:destination="@id/hotTicketsFragment" />
+        <action
+            android:id="@+id/action_aviaTicketsFragment_to_allTicketsFragment"
+            app:destination="@id/allTicketsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/complexRouteFragment"
+        android:name="com.drexask.aviatickets.presentation.ui.fragment.complexRoute.ComplexRouteFragment"
+        android:label="fragment_complex_route"
+        tools:layout="@layout/fragment_complex_route" />
+    <fragment
+        android:id="@+id/hotTicketsFragment"
+        android:name="com.drexask.aviatickets.presentation.ui.fragment.hotTickets.HotTicketsFragment"
+        android:label="HotTicketsFragment"
+        tools:layout="@layout/fragment_hot_tickets"/>
+    <fragment
+        android:id="@+id/weekendFragment"
+        android:name="com.drexask.aviatickets.presentation.ui.fragment.weekEnd.WeekendFragment"
+        android:label="WeekendFragment"
+        tools:layout="@layout/fragment_weekend"/>
+    <fragment
+        android:id="@+id/allTicketsFragment"
+        android:name="com.drexask.aviatickets.presentation.ui.fragment.allTickets.AllTicketsFragment"
+        android:label="fragment_avia_tickets_all_tickets"
+        tools:layout="@layout/fragment_avia_tickets_all_tickets" />
+</navigation>

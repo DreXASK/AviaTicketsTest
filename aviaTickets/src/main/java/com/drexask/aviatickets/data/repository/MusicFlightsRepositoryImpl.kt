@@ -1,8 +1,8 @@
 package com.drexask.aviatickets.data.repository
 
-import com.drexask.data.services.MusicFlightsService
-import com.drexask.domain.models.MusicFlight
-import com.drexask.domain.repository.MusicFlightsRepository
+import com.drexask.aviatickets.data.services.MusicFlightsService
+import com.drexask.aviatickets.domain.models.MusicFlight
+import com.drexask.aviatickets.domain.repository.MusicFlightsRepository
 import javax.inject.Inject
 
 

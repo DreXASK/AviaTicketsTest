@@ -1,6 +1,6 @@
-package com.drexask.domain.repository
+package com.drexask.aviatickets.domain.repository
 
-import com.drexask.domain.models.Ticket
+import com.drexask.aviatickets.domain.models.Ticket
 
 interface TicketsRepository {
 

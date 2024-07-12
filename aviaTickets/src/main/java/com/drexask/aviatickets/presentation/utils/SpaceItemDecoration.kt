@@ -1,4 +1,4 @@
-package com.drexask.presentation.utils
+package com.drexask.aviatickets.presentation.utils
 
 import android.graphics.Rect
 import android.view.View

@@ -1,8 +1,8 @@
 package com.drexask.aviatickets.data.repository
 
-import com.drexask.data.services.DirectFlightService
-import com.drexask.domain.models.DirectFlight
-import com.drexask.domain.repository.DirectFlightsRepository
+import com.drexask.aviatickets.data.services.DirectFlightService
+import com.drexask.aviatickets.domain.models.DirectFlight
+import com.drexask.aviatickets.domain.repository.DirectFlightsRepository
 import javax.inject.Inject
 
 class DirectFlightRepositoryImpl @Inject constructor(

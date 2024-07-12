@@ -1,6 +1,6 @@
-package com.drexask.presentation.models
+package com.drexask.aviatickets.presentation.models
 
-import com.drexask.domain.models.DirectFlight
+import com.drexask.aviatickets.domain.models.DirectFlight
 
 data class DirectFlightUi(
     val title: String,

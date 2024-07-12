@@ -1,8 +1,8 @@
 package com.drexask.aviatickets.data.repository
 
-import com.drexask.data.services.TicketsService
-import com.drexask.domain.models.Ticket
-import com.drexask.domain.repository.TicketsRepository
+import com.drexask.aviatickets.data.services.TicketsService
+import com.drexask.aviatickets.domain.models.Ticket
+import com.drexask.aviatickets.domain.repository.TicketsRepository
 import javax.inject.Inject
 
 class TicketsRepositoryImpl @Inject constructor(

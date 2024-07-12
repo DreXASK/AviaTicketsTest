@@ -1,7 +1,7 @@
-package com.drexask.domain.usecase
+package com.drexask.aviatickets.domain.usecase
 
-import com.drexask.domain.models.MusicFlight
-import com.drexask.domain.repository.MusicFlightsRepository
+import com.drexask.aviatickets.domain.models.MusicFlight
+import com.drexask.aviatickets.domain.repository.MusicFlightsRepository
 
 class GetMusicFlightsUseCase(private val repository: MusicFlightsRepository) {
 

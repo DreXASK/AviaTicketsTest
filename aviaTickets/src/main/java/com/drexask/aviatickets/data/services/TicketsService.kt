@@ -1,6 +1,6 @@
 package com.drexask.aviatickets.data.services
 
-import com.drexask.data.dto.TicketsDownloadedData
+import com.drexask.aviatickets.data.dto.TicketsDownloadedData
 import retrofit2.http.GET
 import retrofit2.http.Query
 

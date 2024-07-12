@@ -1,4 +1,4 @@
-package com.drexask.presentation.utils
+package com.drexask.aviatickets.presentation.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

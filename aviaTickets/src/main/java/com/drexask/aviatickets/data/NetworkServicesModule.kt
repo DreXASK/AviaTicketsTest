@@ -1,8 +1,8 @@
 package com.drexask.aviatickets.data
 
-import com.drexask.data.services.DirectFlightService
-import com.drexask.data.services.MusicFlightsService
-import com.drexask.data.services.TicketsService
+import com.drexask.aviatickets.data.services.DirectFlightService
+import com.drexask.aviatickets.data.services.MusicFlightsService
+import com.drexask.aviatickets.data.services.TicketsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

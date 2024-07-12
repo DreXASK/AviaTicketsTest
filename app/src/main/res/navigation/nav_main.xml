@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/aviaTicketsFragment">
+
+    <navigation android:id="@+id/aviaTicketsFragment"
+        app:startDestination="@id/nav_avia_tickets">
+        <include app:graph="@navigation/nav_avia_tickets" />
+    </navigation>
+    <fragment
+        android:id="@+id/hotelsFragment"
+        android:name="com.drexask.hotels.HotelsFragment"
+        android:label="fragment_hotels"
+        tools:layout="@layout/fragment_hotels" />
+    <fragment
+        android:id="@+id/korocheFragment"
+        android:name="com.drexask.koroche.KorocheFragment"
+        android:label="fragment_koroche"
+        tools:layout="@layout/fragment_koroche" />
+    <fragment
+        android:id="@+id/subscriptionsFragment"
+        android:name="com.drexask.subscriptions.SubscriptionsFragment"
+        android:label="fragment_subscriptions"
+        tools:layout="@layout/fragment_subscriptions" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.drexask.userprofile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+
+
+
+</navigation>
